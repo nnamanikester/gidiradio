@@ -22,6 +22,13 @@ class CreateProgrammesTable extends Migration
             $table->string('image');
             $table->integer('oap_id')->unsigned()->nullable();
             $table->timestamps();
+
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
         });
     }
 

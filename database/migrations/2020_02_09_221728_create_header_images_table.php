@@ -23,6 +23,12 @@ class CreateHeaderImagesTable extends Migration
             $table->string('button_link')->nullable();
             $table->boolean('active')->default(0);
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
         });
     }
 

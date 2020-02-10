@@ -18,6 +18,12 @@ class CreateAsitdropPlaysTable extends Migration
             $table->integer('asitdrop_id')->unsigned();
             $table->string('ip_address');
             $table->timestamps();
+
+            $table->foreign('asitdrop_id')
+                ->references('id')
+                ->on('asitdrops')
+                ->onDelete('cascade');
+
         });
     }
 

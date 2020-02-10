@@ -19,6 +19,12 @@ class CreateBlogViewsTable extends Migration
             $table->string('ip_address');
             $table->date('date');
             $table->timestamps();
+
+            $table->foreign('blog_id')
+                ->references('id')
+                ->on('blogs')
+                ->onDelete('cascade');
+
         });
     }
 

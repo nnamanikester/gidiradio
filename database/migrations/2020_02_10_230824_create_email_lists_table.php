@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEpisodePlaysTable extends Migration
+class CreateEmailListsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,11 @@ class CreateEpisodePlaysTable extends Migration
      */
     public function up()
     {
-        Schema::create('episode_plays', function (Blueprint $table) {
+        Schema::create('email_lists', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('episode_id')->unsigned();
-            $table->string('ip_address');
+            $table->string('name');
+            $table->string('email')->unique();
             $table->timestamps();
-
-            $table->foreign('episode_id')
-                ->references('id')
-                ->on('episodes')
-                ->onDelete('cascade');
-
         });
     }
 
@@ -34,6 +28,6 @@ class CreateEpisodePlaysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('episode_plays');
+        Schema::dropIfExists('email_lists');
     }
 }

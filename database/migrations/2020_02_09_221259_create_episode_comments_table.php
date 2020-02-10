@@ -22,6 +22,12 @@ class CreateEpisodeCommentsTable extends Migration
             $table->text('body');
             $table->boolean('approved')->default(0);
             $table->timestamps();
+
+            $table->foreign('episode_id')
+                ->references('id')
+                ->on('episodes')
+                ->onDelete('cascade');
+
         });
     }
 

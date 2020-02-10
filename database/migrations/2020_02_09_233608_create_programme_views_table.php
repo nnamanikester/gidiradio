@@ -19,6 +19,12 @@ class CreateProgrammeViewsTable extends Migration
             $table->string('ip_address');
             $table->date('date');
             $table->timestamps();
+
+            $table->foreign('programme_id')
+                ->references('id')
+                ->on('programmes')
+                ->onDelete('cascade');
+
         });
     }
 

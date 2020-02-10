@@ -22,6 +22,12 @@ class CreateBlogCommentsTable extends Migration
             $table->text('body');
             $table->boolean('approved')->default(0);
             $table->timestamps();
+
+            $table->foreign('blog_id')
+                ->references('id')
+                ->on('blogs')
+                ->onDelete('cascade');
+
         });
     }
 

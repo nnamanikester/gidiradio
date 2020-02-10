@@ -22,6 +22,13 @@ class CreateProgrammeCommentsTable extends Migration
             $table->text('body');
             $table->boolean('approved')->default(0);
             $table->timestamps();
+
+
+            $table->foreign('programme_id')
+                ->references('id')
+                ->on('programmes')
+                ->onDelete('cascade');
+
         });
     }
 

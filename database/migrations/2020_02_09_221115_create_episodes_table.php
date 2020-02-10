@@ -24,6 +24,23 @@ class CreateEpisodesTable extends Migration
             $table->string('image');
             $table->string('audio');
             $table->timestamps();
+
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
+            $table->foreign('oap_id')
+                ->references('id')
+                ->on('oaps')
+                ->onDelete('cascade');
+
+            $table->foreign('programme_id')
+                ->references('id')
+                ->on('programmes')
+                ->onDelete('cascade');
+
         });
     }
 

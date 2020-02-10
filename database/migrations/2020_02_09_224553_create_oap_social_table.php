@@ -18,6 +18,17 @@ class CreateOapSocialTable extends Migration
             $table->integer('oap_id')->unsigned();
             $table->integer('social_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('oap_id')
+                ->references('id')
+                ->on('oaps')
+                ->onDelete('cascade');
+
+                $table->foreign('social_id')
+                    ->references('id')
+                    ->on('socials')
+                    ->onDelete('cascade');
+
         });
     }
 

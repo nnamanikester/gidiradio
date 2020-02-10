@@ -6,5 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Oap extends Model
 {
-    //
+    protected $fillable = [
+        'name', 'display_name', 'bio', 'title', 'slug'
+    ];
+
+    public function programmes() {
+        return $this->hasMany('App\programme');
+    }
+
+    public function episodes() {
+        return $this->hasMany('App\Episode');
+    }
+
+    public function socials() {
+        return $this->belongsToMany('App\Social');
+    }
+
 }

@@ -18,6 +18,17 @@ class CreateSocialUserTable extends Migration
             $table->integer('social_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('social_id')
+                ->references('id')
+                ->on('socials')
+                ->onDelete('cascade');
+
+                $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users')
+                    ->onDelete('cascade');
+
         });
     }
 

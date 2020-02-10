@@ -19,6 +19,12 @@ class CreateEpisodeViewsTable extends Migration
             $table->string('ip_address');
             $table->date('date');
             $table->timestamps();
+
+            $table->foreign('episode_id')
+                ->references('id')
+                ->on('episodes')
+                ->onDelete('cascade');
+
         });
     }
 

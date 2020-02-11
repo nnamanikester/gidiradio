@@ -15,8 +15,8 @@ class CreateAsitdropsTable extends Migration
     {
         Schema::create('asitdrops', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $tabel->integer('user_id')->unsigned();
-            $tabel->string('title');
+            $table->integer('user_id')->unsigned();
+            $table->string('title');
             $table->string('artist');
             $table->string('image');
             $table->string('audio');

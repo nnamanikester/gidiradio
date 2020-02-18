@@ -12,5 +12,11 @@
 */
 
 Route::get('/', 'HomeController@index');
+// Route::get('/login', 'HomeController@login')->name('login');
+// Route::get('/register', 'HomeController@register')->name('register');
 
 Route::get('/{any}', 'SpaController@index')->where('any', '.*');
+
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');

@@ -20,3 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/site-settings', 'ApiGetSpaController@site_settings');
 Route::get('/programmes', 'ApiGetSpaController@programmes');
 Route::get('/episodes', 'ApiGetSpaController@episodes');
+Route::get('/blogs', 'ApiGetSpaController@blogs');
+Route::get('/as-it-drops', 'ApiGetSpaController@asitdrops');
+Route::get('/oaps', 'ApiGetSpaController@oaps');

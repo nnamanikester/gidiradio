@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Oap;
+use App\Blog;
 use App\Episode;
+use App\Asitdrop;
 use App\Programme;
 use App\SiteSetting;
 use Illuminate\Http\Request;
@@ -35,6 +38,23 @@ class ApiGetSpaController extends Controller
         return response()->json($episode->with('programme', 'oap', 'user', 'views', 'plays', 'comments')->get());
     }
 
+    public function blogs(Blog $blog)
+    {
+        header('Access-Control-Allow-Origin: *');
+        return response()->json($blog->with('comments', 'user', 'views')->get());
+    }
+
+    public function asitdrops(Asitdrop $aid)
+    {
+        header('Access-COntrol-Allow-Origin: *');
+        return response()->json($aid->with('user', 'plays')->get());
+    }
+
+    public function oaps(Oap $oap)
+    {
+        header('Access-Control-Allow-Origin: *');
+        return response()->json($oap->with('programmes', 'episodes', 'socials')->get());
+    }
     /**
      * Show the form for creating a new resource.
      *

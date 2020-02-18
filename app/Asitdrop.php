@@ -14,4 +14,9 @@ class Asitdrop extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function plays()
+    {
+        return $this->hasMany('App\AsitdropPlay');
+    }
+
 }

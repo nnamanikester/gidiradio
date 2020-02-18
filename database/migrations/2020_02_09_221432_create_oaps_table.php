@@ -16,6 +16,8 @@ class CreateOapsTable extends Migration
         Schema::create('oaps', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('image');
+            $table->string('email')->unique();
             $table->string('slug')->unique();
             $table->string('display_name')->nullable();
             $table->text('bio')->nullable();

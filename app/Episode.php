@@ -24,7 +24,7 @@ class Episode extends Model
     }
 
     public function plays() {
-        return $this->hasMany('App\EpisodePlays');
+        return $this->hasMany('App\EpisodePlay');
     }
 
     public function user() {

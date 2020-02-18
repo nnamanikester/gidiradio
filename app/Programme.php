@@ -30,8 +30,4 @@ class Programme extends Model
         return $this->belongsTo('App\Oap');
     }
 
-    public function asitdrops() {
-        return $this->hasMany('App\Asitdrop');
-    }
-
 }

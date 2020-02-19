@@ -77,4 +77,16 @@ class ApiGetSpaController extends Controller
         return response()->json($ad->get());
     }
 
+    public function single_programme($slug, Programme $programme)
+    {
+        header('Access-Control-Allow-Origin: *');
+        return response()->json($programme->where('slug', $slug)->with('episodes', 'oap', 'comments', 'views', 'user')->get());
+    }
+
+    public function single_episode($slug, Episode $episode)
+    {
+        header('Access-Control-Allow-Origin: *');
+        return response()->json($episode->with('programme', 'oap', 'user', 'views', 'plays', 'comments')->get());
+    }
+
 }

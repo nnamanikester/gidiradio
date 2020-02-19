@@ -23,3 +23,4 @@ Route::get('/episodes', 'ApiGetSpaController@episodes');
 Route::get('/blogs', 'ApiGetSpaController@blogs');
 Route::get('/as-it-drops', 'ApiGetSpaController@asitdrops');
 Route::get('/oaps', 'ApiGetSpaController@oaps');
+Route::get('/roles', 'ApiGetSpaController@roles');

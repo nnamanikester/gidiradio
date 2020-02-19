@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Oap;
 use App\Blog;
+use App\Role;
 use App\Episode;
 use App\Asitdrop;
 use App\Programme;
@@ -54,6 +55,12 @@ class ApiGetSpaController extends Controller
     {
         header('Access-Control-Allow-Origin: *');
         return response()->json($oap->with('programmes', 'episodes', 'socials')->get());
+    }
+
+    public function roles(Role $role)
+    {
+        header('Access-Control-Allow-Origin: *');
+        return response()->json($role->with('users')->get());
     }
     /**
      * Show the form for creating a new resource.

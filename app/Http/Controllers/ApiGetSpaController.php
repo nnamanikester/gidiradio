@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Oap;
 use App\Blog;
 use App\Role;
+use App\Advert;
 use App\Episode;
 use App\Asitdrop;
 use App\Programme;
+use App\HeaderImage;
 use App\SiteSetting;
 use Illuminate\Http\Request;
 
@@ -62,69 +64,17 @@ class ApiGetSpaController extends Controller
         header('Access-Control-Allow-Origin: *');
         return response()->json($role->with('users')->get());
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function header_images(HeaderImage $hi)
     {
-        //
+        header('Access-Control-Allow-Origin: *');
+        return response()->json($hi->get());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function adverts(Advert $ad)
     {
-        //
+        header('Access-Control-Allow-Origin: *');
+        return response()->json($ad->get());
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

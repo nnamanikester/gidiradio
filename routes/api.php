@@ -28,8 +28,11 @@ Route::get('/roles', 'ApiGetSpaController@roles');
 Route::get('/header-images', 'ApiGetSpaController@header_images');
 Route::get('/adverts', 'ApiGetSpaController@adverts');
 
-// Single APIs
+// Single GET APIs
 Route::get('/programme/{slug}', 'ApiGetSpaController@single_programme');
 Route::get('/episode/{slug}', 'ApiGetSpaController@single_episode');
 Route::get('/blog/{slug}', 'ApiGetSpaController@single_blog');
 Route::get('/oap/{slug}', 'ApiGetSpaController@single_oap');
+
+// POST APIs
+Route::post('/role/create', 'ApiPostSpaController@create_role');

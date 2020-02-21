@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use Illuminate\Http\Request;
 
 class ApiPostSpaController extends Controller
@@ -11,9 +12,14 @@ class ApiPostSpaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function create_role(Request $request, Role $role)
     {
-
+        header('Access-Control-Allow-Origin: *');
+        $data = $role->create([
+            'name' => $request->name,
+            'guard_name' => $request->name
+        ]);
+        return response()->json($request->all());
     }
 
     /**

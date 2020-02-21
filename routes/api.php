@@ -30,3 +30,4 @@ Route::get('/adverts', 'ApiGetSpaController@adverts');
 // Single APIs
 Route::get('/programme/{slug}', 'ApiGetSpaController@single_programme');
 Route::get('/episode/{slug}', 'ApiGetSpaController@single_episode');
+Route::get('/blog/{slug}', 'ApiGetSpaController@single_blog');

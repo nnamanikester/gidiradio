@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/site-settings', 'ApiGetSpaController@site_settings');
+Route::get('/user/{id}', 'ApiGetSpaController@profile_details');
 Route::get('/programmes', 'ApiGetSpaController@programmes');
 Route::get('/episodes', 'ApiGetSpaController@episodes');
 Route::get('/blogs', 'ApiGetSpaController@blogs');

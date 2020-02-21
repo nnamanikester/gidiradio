@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Oap;
 use App\Blog;
 use App\Role;
@@ -22,10 +23,14 @@ class ApiGetSpaController extends Controller
      */
     public function site_settings()
     {
-
         header('Access-Control-Allow-Origin: *');
         return response()->json([SiteSetting::find(1)]);
+    }
 
+    public function profile_details($id, User $user)
+    {
+        header('Access-Control-Allow-Origin: *');
+        return response()->json($user->findOrFail($id)->with('programmes', 'episodes', 'asitdrops', 'blogs', 'pages', 'adverts', 'headerImages', 'role')->get());
     }
 
     public function programmes()

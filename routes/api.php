@@ -31,3 +31,4 @@ Route::get('/adverts', 'ApiGetSpaController@adverts');
 Route::get('/programme/{slug}', 'ApiGetSpaController@single_programme');
 Route::get('/episode/{slug}', 'ApiGetSpaController@single_episode');
 Route::get('/blog/{slug}', 'ApiGetSpaController@single_blog');
+Route::get('/oap/{slug}', 'ApiGetSpaController@single_oap');

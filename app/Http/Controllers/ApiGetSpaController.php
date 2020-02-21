@@ -95,4 +95,10 @@ class ApiGetSpaController extends Controller
         return response()->json($blog->where('slug', $slug)->with('comments', 'user', 'views')->get());
     }
 
+    public function single_oap($slug, Oap $oap)
+    {
+        header('Access-Control-Allow-Origin: *');
+        return response()->json($oap->where('slug', $slug)->with('programmes', 'episodes', 'socials')->get());
+    }
+
 }

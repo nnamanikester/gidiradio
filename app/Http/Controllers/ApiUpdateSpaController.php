@@ -13,6 +13,17 @@ class ApiUpdateSpaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function handleFile($request_name)
+    {
+        if ($file = $request->file($request_name)) {
+            $name = $file->getOriginalName();
+            move('images/site-info', $name);
+            // $info->$request_name = $name;
+            return $name;
+        }
+    }
+
     public function role(Request $request, Role $role, $id)
     {
         header('Access-Control-Allow-Origin: *');
@@ -29,8 +40,6 @@ class ApiUpdateSpaController extends Controller
         $info = $setting->findOrFail($id);
 
         $info->site_name = $request->site_name;
-        $info->logo = $request->logo;
-        $info->favico = $request->favico;
         $info->link = $request->link;
         $info->email = $request->email;
         $info->phone = $request->phone;
@@ -38,14 +47,43 @@ class ApiUpdateSpaController extends Controller
         $info->signboard_title = $request->signboard_title;
         $info->signboard_button_text = $request->signboard_button_text;
         $info->signboard_button_link = $request->signboard_button_link;
-        $info->signboard_image = $request->signboard_image;
-        $info->default_thumbnail = $request->default_thumbnail;
         $info->tag_line = $request->tag_line;
         $info->facebook = $request->facebook;
         $info->twitter = $request->twitter;
         $info->instagram = $request->instagram;
         $info->radio_station = $request->radio_station;
-
+        if ($file = $request->file('logo')) {
+            if (file_exists('images/site-info/' . $info->logo)) {
+                unlink('images/site-info/' . $info->logo);
+            }
+            $name = $file->getClientOriginalName();
+            $file->move('images/site-info', $name);
+            $info->logo = $name;
+        }
+        if ($file = $request->file('favico')) {
+            if (file_exists('images/site-info/' . $info->favico)) {
+                unlink('images/site-info/' . $info->favico);
+            }
+            $name = $file->getClientOriginalName();
+            $file->move('images/site-info', $name);
+            $info->favico = $name;
+        }
+        if ($file = $request->file('default_thumbnail')) {
+            if (file_exists('images/site-info/' . $info->default_thumbnail)) {
+                unlink('images/site-info/' . $info->default_thumbnail);
+            }
+            $name = $file->getClientOriginalName();
+            $file->move('images/site-info', $name);
+            $info->default_thumbnail = $name;
+        }
+        if ($file = $request->file('signboard_image')) {
+            if (file_exists('images/site-info/' . $info->signboard_image)) {
+                unlink('images/site-info/' . $info->signboard_image);
+            }
+            $name = $file->getClientOriginalName();
+            $file->move('images/site-info', $name);
+            $info->signboard_image = $name;
+        }
         $info->save();
 
         return response()->json($info);

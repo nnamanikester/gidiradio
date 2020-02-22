@@ -39,6 +39,7 @@ Route::post('/role/create', 'ApiPostSpaController@role');
 
 //  UPDATE APIs
 Route::post('/role/{id}/update', 'ApiUpdateSpaController@role');
+Route::post('/site-settings/{id}/update', 'ApiUpdateSpaController@site_settings');
 
 
 // DELETE APIs

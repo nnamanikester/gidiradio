@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use Illuminate\Http\Request;
 
 class ApiDeleteSpaController extends Controller
@@ -11,9 +12,11 @@ class ApiDeleteSpaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function role(Request $request, Role $role, $id)
     {
-        //
+        header('Access-Control-Allow-Origin: *');
+        $data = $role->findOrFail($id)->delete();
+        return response()->json($data);
     }
 
     /**

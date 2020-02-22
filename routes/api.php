@@ -35,4 +35,7 @@ Route::get('/blog/{slug}', 'ApiGetSpaController@single_blog');
 Route::get('/oap/{slug}', 'ApiGetSpaController@single_oap');
 
 // POST APIs
-Route::post('/role/create', 'ApiPostSpaController@create_role');
+Route::post('/role/create', 'ApiPostSpaController@role');
+
+//  UPDATE APIs
+Route::post('/role/{id}/update', 'ApiUpdateSpaController@role');

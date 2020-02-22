@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Role;
 
 class ApiUpdateSpaController extends Controller
 {
@@ -11,9 +12,14 @@ class ApiUpdateSpaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function site_settings()
+    public function role(Request $request, Role $role, $id)
     {
-        //
+        header('Access-Control-Allow-Origin: *');
+        $data = $role->findOrFail($id);
+        $data->name = $request->name;
+        $data->guard_name = $request->guard_name;
+        $data->save();
+        return response()->json($data);
     }
 
     /**

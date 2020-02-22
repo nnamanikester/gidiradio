@@ -12,14 +12,14 @@ class ApiPostSpaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create_role(Request $request, Role $role)
+    public function role(Request $request, Role $role)
     {
         header('Access-Control-Allow-Origin: *');
         $data = $role->create([
             'name' => $request->name,
-            'guard_name' => $request->name
+            'guard_name' => $request->guard_name
         ]);
-        return response()->json($request->all());
+        return response()->json($role->where('id', $data->id)->first());
     }
 
     /**

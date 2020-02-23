@@ -34,13 +34,17 @@ Route::get('/episode/{slug}', 'ApiGetSpaController@single_episode');
 Route::get('/blog/{slug}', 'ApiGetSpaController@single_blog');
 Route::get('/oap/{slug}', 'ApiGetSpaController@single_oap');
 
-// POST APIs
+// CREATE APIs
 Route::post('/role/create', 'ApiPostSpaController@role');
+Route::post('/advert/create', 'ApiPostSpaController@advert');
+
 
 //  UPDATE APIs
 Route::post('/role/{id}/update', 'ApiUpdateSpaController@role');
 Route::post('/site-settings/{id}/update', 'ApiUpdateSpaController@site_settings');
+Route::post('/advert/{id}/update', 'ApiUpdateSpaController@advert');
 
 
 // DELETE APIs
 Route::post('/role/{id}/delete', 'ApiDeleteSpaController@role');
+Route::post('/advert/{id}/delete', 'ApiDeleteSpaController@advert');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Role;
+use App\Advert;
 use Illuminate\Http\Request;
 
 class ApiPostSpaController extends Controller
@@ -22,69 +23,21 @@ class ApiPostSpaController extends Controller
         return response()->json($role->where('id', $data->id)->first());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function advert(Request $request, Advert $advert)
     {
-        //
+        header('Access-Control-Allow-Origin: *');
+        if ($request->active == "true") {
+            $request->active = 1;
+        } else {
+            $request->active = 0;
+        }
+        $data = $advert->create([
+            'user_id' => 1,
+            'title' => $request->title,
+            'content' => $request->content,
+            'active' => $request->active
+        ]);
+        return response()->json($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

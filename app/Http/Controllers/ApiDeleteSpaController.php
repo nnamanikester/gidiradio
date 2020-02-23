@@ -20,8 +20,7 @@ class ApiDeleteSpaController extends Controller
     {
         header('Access-Control-Allow-Origin: *');
         $data = $advert->findOrFail($id);
-        $data->delete();
-        return response()->json($data);
+        return response()->json($data->delete());
     }
 
 }

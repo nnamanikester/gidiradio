@@ -57,7 +57,7 @@ class ApiPostSpaController extends Controller
             'details' => $request->details,
             'image' => $request->image
         ]);
-        return response()->json($request->all());
+        return response()->json($data);
     }
 
 }

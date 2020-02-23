@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Role;
 use App\Advert;
 use App\SiteSetting;
+use App\Programme;
 use Illuminate\Http\Request;
 
 class ApiUpdateSpaController extends Controller
@@ -110,6 +111,23 @@ class ApiUpdateSpaController extends Controller
     public function programme(Request $request, Programme $programme, $id)
     {
         header('Access-Control-Allow-Origin: *');
+        $data = $programme->findOrFail($id);
+        if ($file = $request->file('image')) {
+            if (file_exists('images/programmes/' . $data->image)) {
+                unlink('images/programmes/' . $data->image);
+            }
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images/programmes', $name);
+            $data->image = $name;
+        }
+        $data->title = $request->title;
+        $data->details = $request->details;
+        $data->user_id = 1;
+        $data->oap_id = $request->oap_id;
+        $data->slug = $request->slug;
+        $data->save();
+
+        return response()->json($data);
     }
 
 }

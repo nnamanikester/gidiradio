@@ -92,7 +92,19 @@ class ApiUpdateSpaController extends Controller
 
     public function advert(Request $request, $id, Advert $advert)
     {
-
+        header('Access-Control-Allow-Origin: *');
+        $data = $advert->findOrFail($id);
+        if ($request->active == "true") {
+            $request->active = 1;
+        } else {
+            $request->active = 0;
+        }
+        $data->title = $request->title;
+        $data->content = $request->content;
+        $data->active = $request->active;
+        $data->user_id = 1;
+        $data->save();
+        return response()->json($request->all());
     }
 
 }

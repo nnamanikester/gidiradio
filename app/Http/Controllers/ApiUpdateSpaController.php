@@ -107,4 +107,9 @@ class ApiUpdateSpaController extends Controller
         return response()->json($request->all());
     }
 
+    public function programme(Request $request, Programme $programme, $id)
+    {
+        header('Access-Control-Allow-Origin: *');
+    }
+
 }

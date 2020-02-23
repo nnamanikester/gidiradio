@@ -23,4 +23,9 @@ class ApiDeleteSpaController extends Controller
         return response()->json($data->delete());
     }
 
+    public function programme($id,Programme $programme)
+    {
+        header('Access-Control-Allow-Origin: *');
+    }
+
 }

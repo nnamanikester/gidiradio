@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Role;
+use App\Programme;
 use App\Advert;
 use Illuminate\Http\Request;
 
@@ -38,6 +39,25 @@ class ApiPostSpaController extends Controller
             'active' => $request->active
         ]);
         return response()->json($data);
+    }
+
+    public function programmes(Request $request, Programme $programme)
+    {
+        header('Access-Control-Allow-Origin: *');
+        if ($file = $request->file('image')) {
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images/programmes', $name);
+            $request->image = $name;
+        }
+        $data = $programme->create([
+            'user_id' => 1,
+            'oap_id' => $request->oap_id,
+            'title' => $request->title,
+            'slug' => $request->slug,
+            'details' => $request->details,
+            'image' => $request->image
+        ]);
+        return response()->json($request->all());
     }
 
 }

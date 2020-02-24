@@ -6,6 +6,7 @@ use App\Role;
 use App\Advert;
 use App\SiteSetting;
 use App\Programme;
+use App\Episode;
 use Illuminate\Http\Request;
 
 class ApiUpdateSpaController extends Controller
@@ -128,6 +129,11 @@ class ApiUpdateSpaController extends Controller
         $data->save();
 
         return response()->json($data);
+    }
+
+    public function episode(Request $request, Episode $episode, $id)
+    {
+        header('Access-Control-Allow-Origin: *');
     }
 
 }

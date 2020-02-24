@@ -36,4 +36,14 @@ class ApiDeleteSpaController extends Controller
         return response()->json($data->delete());
     }
 
+    public function episode(Episode $episode, $id)
+    {
+        header('Access-Control-Allow-Origin: *');
+        $data = $episode->findOrFail($id);
+        if (file_exists('images/programmes/episodes/' . $data->image)) {
+            unlink('images/programmes/episodes/' . $data->image);
+        }
+        return response()->json($data->delete());
+    }
+
 }

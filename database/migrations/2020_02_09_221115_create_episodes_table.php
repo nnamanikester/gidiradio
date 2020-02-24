@@ -19,7 +19,7 @@ class CreateEpisodesTable extends Migration
             $table->integer('oap_id');
             $table->integer('programme_id')->unsigned();
             $table->string('title');
-            $table->string('slug')->unique();
+            $table->string('slug');
             $table->text('details')->nullable();
             $table->string('image');
             $table->string('audio');

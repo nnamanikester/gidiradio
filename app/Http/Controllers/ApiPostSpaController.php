@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Role;
 use App\Programme;
 use App\Advert;
+use App\Episode;
 use Illuminate\Http\Request;
 
 class ApiPostSpaController extends Controller
@@ -58,6 +59,32 @@ class ApiPostSpaController extends Controller
             'image' => $request->image
         ]);
         return response()->json($data);
+    }
+
+    public function episodes(Request $request, Episode $episode)
+    {
+        header('Access-Control-Allow-Origin: *');
+        if ($file = $request->file('image')) {
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images/programmes/episodes', $name);
+            $request->image = $name;
+        }
+        if ($file = $request->file('audio')) {
+            $name = time() . '_'. $file->getClientOriginalName();
+            $file->move('audio/episodes', $name);
+            $request->audio = $name;
+        }
+        $data = $episode->create([
+            'user_id' => 1,
+            'oap_id' => $request->oap_id,
+            'title' => $request->title,
+            'slug' => $request->slug,
+            'details' => $request->details,
+            'image' => $request->image,
+            'audio' => $request->audio,
+            'programme_id' => $request->programme_id
+        ]);
+        return response()->json($request->all());
     }
 
 }

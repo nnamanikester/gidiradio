@@ -124,6 +124,32 @@ class ApiUpdateSpaController extends Controller
     public function episode(Request $request, Episode $episode, $id)
     {
         header('Access-Control-Allow-Origin: *');
+        $data = $episode->findOrFail($id);
+        if ($file = $request->file('image')) {
+            if (file_exists('images/programmes/episodes/' . $data->image)) {
+                unlink('images/programmes/episodes/' . $data->image);
+            }
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images/programmes/episodes', $name);
+            $data->image = $name;
+        }
+        if ($file = $request->file('audio')) {
+            if (file_exists('audio/episodes/' . $data->audio)) {
+                unlink('audio/episodes/' . $data->audio);
+            }
+            $name = time() . '_'. $file->getClientOriginalName();
+            $file->move('audio/episodes', $name);
+            $data->audio = $name;
+        }
+        $data->title = $request->title;
+        $data->details = $request->details;
+        $data->user_id = 1;
+        $data->oap_id = $request->oap_id;
+        $data->slug = $request->slug;
+        $data->programme_id = $request->programme_id;
+        $data->save();
+
+        return response()->json($data);
     }
 
 }

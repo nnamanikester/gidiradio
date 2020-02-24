@@ -17,16 +17,6 @@ class ApiUpdateSpaController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function handleFile($request_name)
-    {
-        if ($file = $request->file($request_name)) {
-            $name = $file->getOriginalName();
-            move('images/site-info', $name);
-            // $info->$request_name = $name;
-            return $name;
-        }
-    }
-
     public function role(Request $request, Role $role, $id)
     {
         header('Access-Control-Allow-Origin: *');

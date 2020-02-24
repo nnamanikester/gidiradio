@@ -43,6 +43,9 @@ class ApiDeleteSpaController extends Controller
         if (file_exists('images/programmes/episodes/' . $data->image)) {
             unlink('images/programmes/episodes/' . $data->image);
         }
+        if (file_exists('audio/episodes/' . $data->audio)) {
+            unlink('audio/episodes/' . $data->audio);
+        }
         return response()->json($data->delete());
     }
 

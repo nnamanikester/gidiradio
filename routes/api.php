@@ -53,4 +53,4 @@ Route::post('/episode/{id}/update', 'ApiUpdateSpaController@episode');
 Route::post('/role/{id}/delete', 'ApiDeleteSpaController@role');
 Route::post('/advert/{id}/delete', 'ApiDeleteSpaController@advert');
 Route::post('/programme/{id}/delete', 'ApiDeleteSpaController@programme');
-Route::post('/episode/{id}/delete', 'ApiDeleteSpaController@episdoe');
+Route::post('/episode/{id}/delete', 'ApiDeleteSpaController@episode');

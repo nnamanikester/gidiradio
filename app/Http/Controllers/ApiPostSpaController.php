@@ -104,9 +104,9 @@ class ApiPostSpaController extends Controller
         $data = $music->create([
             'user_id' => 1,
             'title' => $request->title,
-            'audio' => $request->audio,
             'artist' => $request->artist,
-            'image' => $request->image
+            'image' => $request->image,
+            'audio' => $request->audio
         ]);
         return response()->json($data);
     }

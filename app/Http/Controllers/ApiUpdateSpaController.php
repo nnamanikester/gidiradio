@@ -153,7 +153,7 @@ class ApiUpdateSpaController extends Controller
         return response()->json($data);
     }
 
-    public function asitdrops(Request $request, Asitdrop $music, $id)
+    public function asitdrop(Request $request, Asitdrop $music, $id)
     {
         header('Access-Control-Allow-Origin: *');
         $data = $music->findOrFail($id);

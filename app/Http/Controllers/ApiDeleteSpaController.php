@@ -50,9 +50,17 @@ class ApiDeleteSpaController extends Controller
         return response()->json($data->delete());
     }
 
-    public function asitdrops(Asitdrop $music, $id)
+    public function asitdrop(Asitdrop $music, $id)
     {
         header('Access-Control-Allow-Origin: *');
+        $data = $music->findOrFail($id);
+        if (file_exists('images/audio/' . $data->image)) {
+            unlink('images/audio/' . $data->image);
+        }
+        if (file_exists('audio/asitdrops/' . $data->audio)) {
+            unlink('audio/asitdrops/' . $data->audio);
+        }
+        return response()->json($data->delete());
     }
 
 }

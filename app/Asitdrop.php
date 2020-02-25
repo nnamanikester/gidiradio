@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Asitdrop extends Model
 {
-    protected $fillabel = [
+    protected $fillable = [
         'user_id', 'title', 'artist', 'image', 'audio'
     ];
 

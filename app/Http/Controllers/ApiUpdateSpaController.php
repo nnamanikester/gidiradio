@@ -156,6 +156,29 @@ class ApiUpdateSpaController extends Controller
     public function asitdrops(Request $request, Asitdrop $music, $id)
     {
         header('Access-Control-Allow-Origin: *');
+        $data = $music->findOrFail($id);
+        if ($file = $request->file('image')) {
+            if (file_exists('images/audio/' . $data->image)) {
+                unlink('images/audio/' . $data->image);
+            }
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images/audio', $name);
+            $data->image = $name;
+        }
+        if ($file = $request->file('audio')) {
+            if (file_exists('audio/asitdrops/' . $data->audio)) {
+                unlink('audio/asitdrops/' . $data->audio);
+            }
+            $name = time() . '_'. $file->getClientOriginalName();
+            $file->move('audio/asitdrops', $name);
+            $data->audio = $name;
+        }
+        $data->title = $request->title;
+        $data->artist = $request->artist;
+        $data->user_id = 1;
+        $data->save();
+
+        return response()->json($data);
     }
 
 }

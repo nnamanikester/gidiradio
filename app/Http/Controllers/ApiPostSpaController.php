@@ -85,12 +85,30 @@ class ApiPostSpaController extends Controller
             'audio' => $request->audio,
             'programme_id' => $request->programme_id
         ]);
-        return response()->json($request->all());
+        return response()->json($data);
     }
 
     public function asitdrops(Request $request, Asitdrop $music)
     {
         header('Access-Control-Allow-Origin: *');
+        if ($file = $request->file('image')) {
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images/audio', $name);
+            $request->image = $name;
+        }
+        if ($file = $request->file('audio')) {
+            $name = time() . '_'. $file->getClientOriginalName();
+            $file->move('audio/asitdrops', $name);
+            $request->audio = $name;
+        }
+        $data = $music->create([
+            'user_id' => 1,
+            'title' => $request->title,
+            'audio' => $request->audio,
+            'artist' => $request->artist,
+            'image' => $request->image
+        ]);
+        return response()->json($data);
     }
 
 }

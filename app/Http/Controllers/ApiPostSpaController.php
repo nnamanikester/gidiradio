@@ -6,6 +6,7 @@ use App\Role;
 use App\Programme;
 use App\Advert;
 use App\Episode;
+use App\Asitdrop;
 use Illuminate\Http\Request;
 
 class ApiPostSpaController extends Controller
@@ -85,6 +86,11 @@ class ApiPostSpaController extends Controller
             'programme_id' => $request->programme_id
         ]);
         return response()->json($request->all());
+    }
+
+    public function asitdrops(Request $request, Asitdrop $music)
+    {
+        header('Access-Control-Allow-Origin: *');
     }
 
 }

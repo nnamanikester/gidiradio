@@ -6,6 +6,7 @@ use App\Role;
 use App\Advert;
 use App\Programme;
 use App\Episode;
+use App\Asitdrop;
 use Illuminate\Http\Request;
 
 class ApiDeleteSpaController extends Controller
@@ -47,6 +48,11 @@ class ApiDeleteSpaController extends Controller
             unlink('audio/episodes/' . $data->audio);
         }
         return response()->json($data->delete());
+    }
+
+    public function asitdrops(Asitdrop $music, $id)
+    {
+        header('Access-Control-Allow-Origin: *');
     }
 
 }

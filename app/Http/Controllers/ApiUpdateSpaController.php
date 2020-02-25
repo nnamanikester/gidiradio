@@ -7,6 +7,7 @@ use App\Advert;
 use App\SiteSetting;
 use App\Programme;
 use App\Episode;
+use App\Asitdrop;
 use Illuminate\Http\Request;
 
 class ApiUpdateSpaController extends Controller
@@ -150,6 +151,11 @@ class ApiUpdateSpaController extends Controller
         $data->save();
 
         return response()->json($data);
+    }
+
+    public function asitdrops(Request $request, Asitdrop $music, $id)
+    {
+        header('Access-Control-Allow-Origin: *');
     }
 
 }

@@ -176,6 +176,7 @@ class ApiUpdateSpaController extends Controller
         $data->title = $request->title;
         $data->artist = $request->artist;
         $data->user_id = 1;
+
         $data->save();
 
         return response()->json($data);

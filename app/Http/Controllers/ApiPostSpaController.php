@@ -111,4 +111,23 @@ class ApiPostSpaController extends Controller
         return response()->json($data);
     }
 
+    public function oaps(Oap $oap, Request $request)
+    {
+        header('Access-Control-Allow-Origi: *');
+        if ($file = $request->file('image')) {
+            $name = time() . '_'. $file->getClientOriginalName();
+            $file->move('images/oaps', $name);
+            $request->image = $name;
+        }
+        $data = $oap->create([
+            'name' => $request->name,
+            'display_name' => $request->display_name,
+            'title' => $request->title,
+            'slug' => $request->slug,
+            'bio' => $request->bio,
+            'image' => $request->image
+        ]);
+        return response()->json($data);
+    }
+
 }

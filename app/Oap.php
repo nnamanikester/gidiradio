@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Oap extends Model
 {
     protected $fillable = [
-        'name', 'display_name', 'bio', 'title', 'slug'
+        'name', 'display_name', 'bio', 'title', 'slug', 'image'
     ];
 
     public function programmes() {

@@ -40,6 +40,7 @@ Route::post('/advert/create', 'ApiPostSpaController@advert');
 Route::post('/programmes/create', 'ApiPostSpaController@programmes');
 Route::post('/episodes/create', 'ApiPostSpaController@episodes');
 Route::post('/asitdrops/create', 'ApiPostSpaController@asitdrops');
+Route::post('/oaps/create', 'ApiPostSpaController@oaps');
 
 
 //  UPDATE APIs
@@ -49,6 +50,7 @@ Route::post('/advert/{id}/update', 'ApiUpdateSpaController@advert');
 Route::post('/programme/{id}/update', 'ApiUpdateSpaController@programme');
 Route::post('/episode/{id}/update', 'ApiUpdateSpaController@episode');
 Route::post('/asitdrop/{id}/update', 'ApiUpdateSpaController@asitdrop');
+Route::post('/oap/{id}/update', 'ApiUpdateSpaController@oap');
 
 
 // DELETE APIs
@@ -57,3 +59,4 @@ Route::post('/advert/{id}/delete', 'ApiDeleteSpaController@advert');
 Route::post('/programme/{id}/delete', 'ApiDeleteSpaController@programme');
 Route::post('/episode/{id}/delete', 'ApiDeleteSpaController@episode');
 Route::post('/asitdrop/{id}/delete', 'ApiDeleteSpaController@asitdrop');
+Route::post('/oap/{id}/delete', 'ApiDeleteSpaController@oap');

@@ -8,6 +8,7 @@ use App\Advert;
 use App\Episode;
 use App\Asitdrop;
 use App\Oap;
+use App\Blog;
 use Illuminate\Http\Request;
 
 class ApiPostSpaController extends Controller
@@ -130,6 +131,24 @@ class ApiPostSpaController extends Controller
             'email' => $request->email
         ]);
         return response()->json($request->all());
+    }
+
+    public function blogs(Blog $blog, Request $request)
+    {
+        header('Access-Control-Allow-Origin: *');
+        if ($file = $request->file('image')) {
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images/blogs', $name);
+            $request->image = $name;
+        }
+        $data = $blog->create([
+            'user_id' => 1,
+            'title' => $request->title,
+            'body' => $request->body,
+            'slug' => $request->slug,
+            'image' => $request->image
+        ]);
+        return response()->json($data);
     }
 
 }

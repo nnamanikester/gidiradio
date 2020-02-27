@@ -8,6 +8,7 @@ use App\Programme;
 use App\Episode;
 use App\Asitdrop;
 use App\Oap;
+use App\Blog;
 use Illuminate\Http\Request;
 
 class ApiDeleteSpaController extends Controller
@@ -70,6 +71,16 @@ class ApiDeleteSpaController extends Controller
         $data = $oap->findOrFail($id);
         if (file_exists('images/oaps/' . $data->image)) {
             unlink('images/oaps/' . $data->image);
+        }
+        return response()->json($data->delete());
+    }
+
+    public function blog(Blog $blog, $id)
+    {
+        header('Access-Control-Allow-Origin: *');
+        $data = $blog->findOrFail($id);
+        if (file_exists('images/blogs/' . $data->image)) {
+            unlink('images/blogs/' . $data->image);
         }
         return response()->json($data->delete());
     }

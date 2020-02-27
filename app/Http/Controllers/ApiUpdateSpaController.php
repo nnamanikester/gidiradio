@@ -9,6 +9,7 @@ use App\Programme;
 use App\Episode;
 use App\Asitdrop;
 use App\Oap;
+use App\Blog;
 use Illuminate\Http\Request;
 
 class ApiUpdateSpaController extends Controller
@@ -206,5 +207,27 @@ class ApiUpdateSpaController extends Controller
         return response()->json($data);
 
     }
+
+    public function blog(Blog $blog, Request $request, $id)
+    {
+        header('Access-Control-Allow-Origin: *');
+        $data = $blog->findOrFail($id);
+        if ($file = $request->file('image')) {
+            if (file_exists('images/blogs/' . $data->image)) {
+                unlink('images/blogs/' . $data->image);
+            }
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images/blogs', $name);
+            $data->image = $name;
+        }
+        $data->title = $request->title;
+        $data->slug = $request->slug;
+        $data->body = $request->body;
+        $data->user_id = 1;
+        $data->save();
+        
+        return response()->json($data);
+    }
+
 
 }

@@ -8,6 +8,7 @@ use App\SiteSetting;
 use App\Programme;
 use App\Episode;
 use App\Asitdrop;
+use App\Oap;
 use Illuminate\Http\Request;
 
 class ApiUpdateSpaController extends Controller
@@ -180,6 +181,30 @@ class ApiUpdateSpaController extends Controller
         $data->save();
 
         return response()->json($data);
+    }
+
+    public function oap(Request $request, Oap $oap, $id)
+    {
+        header('Access-Control-Allow-Origin: *');
+        $data = $oap->findOrFail($id);
+        if ($file = $request->file('image')) {
+            if (file_exists('images/oaps/' . $data->image)) {
+                unlink('images/oaps/' . $data->image);
+            }
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images/oaps', $name);
+            $data->image = $name;
+        }
+        $data->name = $request->name;
+        $data->title = $request->title;
+        $data->display_name = $request->display_name;
+        $data->slug = $request->slug;
+        $data->email = $request->email;
+        $data->bio = $request->bio;
+        $data->save();
+
+        return response()->json($data);
+
     }
 
 }

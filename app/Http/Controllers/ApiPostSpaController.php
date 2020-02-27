@@ -7,6 +7,7 @@ use App\Programme;
 use App\Advert;
 use App\Episode;
 use App\Asitdrop;
+use App\Oap;
 use Illuminate\Http\Request;
 
 class ApiPostSpaController extends Controller
@@ -111,11 +112,11 @@ class ApiPostSpaController extends Controller
         return response()->json($data);
     }
 
-    public function oaps(Oap $oap, Request $request)
+    public function oaps(Request $request, Oap $oap)
     {
-        header('Access-Control-Allow-Origi: *');
+        header('Access-Control-Allow-Origin: *');
         if ($file = $request->file('image')) {
-            $name = time() . '_'. $file->getClientOriginalName();
+            $name = time() . $file->getClientOriginalName();
             $file->move('images/oaps', $name);
             $request->image = $name;
         }
@@ -125,9 +126,10 @@ class ApiPostSpaController extends Controller
             'title' => $request->title,
             'slug' => $request->slug,
             'bio' => $request->bio,
-            'image' => $request->image
+            'image' => $request->image,
+            'email' => $request->email
         ]);
-        return response()->json($data);
+        return response()->json($request->all());
     }
 
 }

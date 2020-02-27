@@ -7,6 +7,7 @@ use App\Advert;
 use App\Programme;
 use App\Episode;
 use App\Asitdrop;
+use App\Oap;
 use Illuminate\Http\Request;
 
 class ApiDeleteSpaController extends Controller

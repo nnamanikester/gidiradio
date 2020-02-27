@@ -64,4 +64,14 @@ class ApiDeleteSpaController extends Controller
         return response()->json($data->delete());
     }
 
+    public function oap(Oap $oap, $id)
+    {
+        header('Access-Control-Allow-Origin: *');
+        $data = $oap->findOrFail($id);
+        if (file_exists('images/oaps/' . $data->image)) {
+            unlink('images/oaps/' . $data->image);
+        }
+        return response()->json($data->delete());
+    }
+
 }

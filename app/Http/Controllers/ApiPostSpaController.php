@@ -9,6 +9,7 @@ use App\Episode;
 use App\Asitdrop;
 use App\Oap;
 use App\Blog;
+use App\HeaderImage;
 use Illuminate\Http\Request;
 
 class ApiPostSpaController extends Controller
@@ -147,6 +148,31 @@ class ApiPostSpaController extends Controller
             'body' => $request->body,
             'slug' => $request->slug,
             'image' => $request->image
+        ]);
+        return response()->json($data);
+    }
+
+    public function header_images(HeaderImage $header, Request $request)
+    {
+        header('Access-Control-Allow-Origin: *');
+        if ($file = $request->file('image')) {
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images/header', $name);
+            $request->image = $name;
+        }
+        if ($request->active == "true") {
+            $request->active = 1;
+        } else {
+            $request->active = 0;
+        }
+        $data = $header->create([
+            'user_id' => 1,
+            'content' => $request->content,
+            'title' => $request->title,
+            'button_text' => $request->button_text,
+            'button_link' => $request->button_link,
+            'image' => $request->image,
+            'active' => $request->active
         ]);
         return response()->json($data);
     }

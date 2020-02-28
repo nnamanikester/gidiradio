@@ -10,6 +10,8 @@ use App\Episode;
 use App\Asitdrop;
 use App\Oap;
 use App\Blog;
+use App\HeaderImage;
+use App\User;
 use Illuminate\Http\Request;
 
 class ApiUpdateSpaController extends Controller
@@ -225,9 +227,61 @@ class ApiUpdateSpaController extends Controller
         $data->body = $request->body;
         $data->user_id = 1;
         $data->save();
-        
+
         return response()->json($data);
     }
 
+    public function header_image(HeaderImage $header, Request $request, $id)
+    {
+        header('Access-Control-Allow-Origin: *');
+        $data = $header->findOrFail($id);
+        if ($file = $request->file('image')) {
+            if (file_exists('images/header/' . $data->image)) {
+                unlink('images/header/' . $data->image);
+            }
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images/header', $name);
+            $data->image = $name;
+        }
+        if ($request->active == "true") {
+            $request->active = 1;
+        } else {
+            $request->active = 0;
+        }
+        $data->user_id = 1;
+        $data->button_text = $request->button_text;
+        $data->button_link = $request->button_link;
+        $data->title = $request->title;
+        $data->content = $request->content;
+        $data->active = $request->active;
+        $data->save();
+
+        return response()->json($data);
+    }
+
+    public function user(Request $request, User $user, $id)
+    {
+        header('Access-Control-Allow-Origin: *');
+        $data = $user->findOrFail($id);
+        if ($file = $request->file('image')) {
+            if (file_exists('images/users/' . $data->image)) {
+                unlink('images/users/' . $data->image);
+            }
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images/users', $name);
+            $data->image = $name;
+        }
+        $data->name = $request->name;
+        $data->username = $request->username;
+        $data->email =  $request->email;
+        $data->country = $request->country;
+        $data->state = $request->state;
+        $data->bio = $request->bio;
+        if ($request->password) {
+            $data->password = bcrypt($request->password);
+        }
+        $data->save();
+        return response()->json($data);
+    }
 
 }

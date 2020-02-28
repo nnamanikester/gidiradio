@@ -42,9 +42,11 @@ Route::post('/episodes/create', 'ApiPostSpaController@episodes');
 Route::post('/asitdrops/create', 'ApiPostSpaController@asitdrops');
 Route::post('/oaps/create', 'ApiPostSpaController@oaps');
 Route::post('/blogs/create', 'ApiPostSpaController@blogs');
+Route::post('/header-images/create', 'ApiPostSpaController@header_images');
 
 
 //  UPDATE APIs
+Route::post('/user/{id}/update', 'ApiUpdateSpaController@user');
 Route::post('/role/{id}/update', 'ApiUpdateSpaController@role');
 Route::post('/site-settings/{id}/update', 'ApiUpdateSpaController@site_settings');
 Route::post('/advert/{id}/update', 'ApiUpdateSpaController@advert');
@@ -53,6 +55,7 @@ Route::post('/episode/{id}/update', 'ApiUpdateSpaController@episode');
 Route::post('/asitdrop/{id}/update', 'ApiUpdateSpaController@asitdrop');
 Route::post('/oap/{id}/update', 'ApiUpdateSpaController@oap');
 Route::post('/blog/{id}/update', 'ApiUpdateSpaController@blog');
+Route::post('/header-image/{id}/update', 'ApiUpdateSpaController@header_image');
 
 
 // DELETE APIs
@@ -62,4 +65,5 @@ Route::post('/programme/{id}/delete', 'ApiDeleteSpaController@programme');
 Route::post('/episode/{id}/delete', 'ApiDeleteSpaController@episode');
 Route::post('/asitdrop/{id}/delete', 'ApiDeleteSpaController@asitdrop');
 Route::post('/oap/{id}/delete', 'ApiDeleteSpaController@oap');
-Route::post('/blog/{id}/delete', 'ApiDeleteSpaController@blog');
+Route::post('/blog/{id}/delete', 'Api DeleteSpaController@blog');
+Route::post('/header-image/{id}/delete', 'Api DeleteSpaController@header_image');

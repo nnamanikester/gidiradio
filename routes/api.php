@@ -66,5 +66,5 @@ Route::post('/programme/{id}/delete', 'ApiDeleteSpaController@programme');
 Route::post('/episode/{id}/delete', 'ApiDeleteSpaController@episode');
 Route::post('/asitdrop/{id}/delete', 'ApiDeleteSpaController@asitdrop');
 Route::post('/oap/{id}/delete', 'ApiDeleteSpaController@oap');
-Route::post('/blog/{id}/delete', 'Api DeleteSpaController@blog');
-Route::post('/header-image/{id}/delete', 'Api DeleteSpaController@header_image');
+Route::post('/blog/{id}/delete', 'ApiDeleteSpaController@blog');
+Route::post('/header-image/{id}/delete', 'ApiDeleteSpaController@header_image');

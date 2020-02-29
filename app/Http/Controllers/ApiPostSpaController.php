@@ -10,7 +10,9 @@ use App\Asitdrop;
 use App\Oap;
 use App\Blog;
 use App\HeaderImage;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ApiPostSpaController extends Controller
 {
@@ -19,6 +21,31 @@ class ApiPostSpaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function login(Request $request, User $user)
+    {
+        header('Access-Control-Allow-Origin: *');
+        $username = $request->username;
+        $password = $request->password;
+        $user = $user->where([['username', $username], ['role_id', 1]])->first();
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Incorrect Username!'
+            ]);
+        }
+        if (!Hash::check($password, $user->password)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Incorrect Password!'
+            ]);
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Success!',
+            'user' => $user
+        ]);
+    }
+
     public function role(Request $request, Role $role)
     {
         header('Access-Control-Allow-Origin: *');

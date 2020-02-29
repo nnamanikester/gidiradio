@@ -27,6 +27,7 @@ Route::get('/oaps', 'ApiGetSpaController@oaps');
 Route::get('/roles', 'ApiGetSpaController@roles');
 Route::get('/header-images', 'ApiGetSpaController@header_images');
 Route::get('/adverts', 'ApiGetSpaController@adverts');
+Route::get('/site-stats', 'ApiGetSpaController@site_stats');
 
 // Single GET APIs
 Route::get('/programme/{slug}', 'ApiGetSpaController@single_programme');

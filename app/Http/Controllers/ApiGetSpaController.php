@@ -106,4 +106,22 @@ class ApiGetSpaController extends Controller
         return response()->json($oap->where('slug', $slug)->with('programmes', 'episodes', 'socials')->get());
     }
 
+    public function site_stats()
+    {
+        $asitdrop = new Asitdrop;
+        $asitdropPlay = new AsitdropPlay;
+        $blog = new Blog;
+        $blogComment = new BlogComment;
+        $blogView = new BlogView;
+        $episode = new Episode;
+        $episodeComment = new EpisdoeComment;
+        $episodePlay = new EpisodePlay;
+        $episodeView = new EpisdoeView;
+        $programme = new Programme;
+        $programmeComment = new ProgrammeComment;
+        $programmeView = new ProgrammeView;
+        $user = new User;
+
+    }
+
 }

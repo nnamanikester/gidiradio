@@ -12,6 +12,14 @@ use App\Asitdrop;
 use App\Programme;
 use App\HeaderImage;
 use App\SiteSetting;
+use App\BlogComment;
+use App\BlogView;
+use App\AsitdropPlay;
+use App\EpisodeComment;
+use App\EpisodeView;
+use App\EpisodePlay;
+use App\ProgrammeComment;
+use App\ProgrammeView;
 use Illuminate\Http\Request;
 
 class ApiGetSpaController extends Controller
@@ -108,20 +116,36 @@ class ApiGetSpaController extends Controller
 
     public function site_stats()
     {
+        header('Access-Control-Allow-Origin: *');
         $asitdrop = new Asitdrop;
         $asitdropPlay = new AsitdropPlay;
         $blog = new Blog;
         $blogComment = new BlogComment;
         $blogView = new BlogView;
         $episode = new Episode;
-        $episodeComment = new EpisdoeComment;
+        $episodeComment = new EpisodeComment;
         $episodePlay = new EpisodePlay;
-        $episodeView = new EpisdoeView;
+        $episodeView = new EpisodeView;
         $programme = new Programme;
         $programmeComment = new ProgrammeComment;
         $programmeView = new ProgrammeView;
         $user = new User;
 
+        $response = [
+            'asitdrops' => count($asitdrop->all()),
+            'asitdropPlays' => count($asitdropPlay->all()),
+            'blogs' => count($blog->all()),
+            'blogComments' => count($blogComment->all()),
+            'blogViews' => count($blogView->all()),
+            'episodes' => count($episode->all()),
+            'episodeComments' => count($episodeComment->all()),
+            'episodeViews' => count($episodeView->all()),
+            'programmes' => count($programme->all()),
+            'programmeViews' => count($programmeView->all()),
+            'programmeComments' => count($programmeComment->all()),
+            'users' => count($user->all())
+        ];
+        return response()->json($response);
     }
 
 }

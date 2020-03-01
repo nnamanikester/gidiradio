@@ -13,6 +13,7 @@ use App\Blog;
 use App\HeaderImage;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ApiUpdateSpaController extends Controller
 {

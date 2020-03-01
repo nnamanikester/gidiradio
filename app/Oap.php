@@ -11,7 +11,7 @@ class Oap extends Model
     ];
 
     public function programmes() {
-        return $this->hasMany('App\programme');
+        return $this->hasMany('App\Programme');
     }
 
     public function episodes() {

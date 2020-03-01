@@ -264,6 +264,7 @@ class ApiUpdateSpaController extends Controller
     {
         header('Access-Control-Allow-Origin: *');
         $data = $user->findOrFail($id);
+
         if ($file = $request->file('image')) {
             if (file_exists('images/users/' . $data->image)) {
                 unlink('images/users/' . $data->image);
@@ -272,17 +273,29 @@ class ApiUpdateSpaController extends Controller
             $file->move('images/users', $name);
             $data->image = $name;
         }
+        if ($request->oldPassword) {
+            if (!Hash::check($request->oldPassword, $data->password)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'The old password you provided did not match the previous one!'
+                ]);
+            }
+            $data->password = Hash::make($request->password);
+        }
         $data->name = $request->name;
         $data->username = $request->username;
         $data->email =  $request->email;
         $data->country = $request->country;
         $data->state = $request->state;
         $data->bio = $request->bio;
-        if ($request->password) {
-            $data->password = bcrypt($request->password);
-        }
+        $data->phone = $request->bio;
         $data->save();
-        return response()->json($data);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Profile Update Successfully!',
+            'user' => $data
+        ]);
     }
 
 }

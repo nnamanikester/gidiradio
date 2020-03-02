@@ -5,7 +5,14 @@ import VueMeta from 'vue-meta'
 Vue.use(VueRouter)
 Vue.use(VueMeta)
 
-const routes = [{
+const routes = [
+    {
+        path: '/home',
+        name: 'Home',
+        component: () =>
+            import ('../views/Home.vue')
+    },
+    {
         path: '/programme/:title',
         name: 'Programme',
         component: () =>

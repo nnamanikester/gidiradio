@@ -1,19 +1,19 @@
 <template>
-    <article class="station type-station status-publish has-post-thumbnail hentry genre-country entry">
+    <article v-if="programme" class="station type-station status-publish has-post-thumbnail hentry genre-country entry">
 
         <div class="entry-header-container header-station">
 
             <figure class="post-thumbnail">
-                <img width="1000" height="1164" src="http://flatfull.com/wp/bepop/wp-content/uploads/2019/06/pexels-photo-2092474.jpeg" class="attachment-full size-full wp-post-image" alt="" style="object-position: 50% 100%" sizes="(max-width: 1000px) 100vw, 1000px">
+                <img width="1000" height="1164" :src="src + programme.image" class="attachment-full size-full wp-post-image" alt="" style="object-position: 50% 100%" sizes="(max-width: 1000px) 100vw, 1000px">
             </figure>
 
             <header class="entry-header">
-                <h1 class="entry-title">The Return Of Rangers</h1>
+                <h1 class="entry-title">{{ programme.title }}</h1>
                 <div class="entry-meta">
-                    <span class="play-count">1.1K Comments</span>.
-                    <span class="btn-like"> <span class="count"> 9 views</span></span>.
-                    <span class="byline"><span class="svg-icon"><img alt="" src="http://flatfull.com/wp/bepop/wp-content/uploads/2019/06/Adam-Stefancik_avatar-96x96.jpeg" class="avatar avatar-48 photo" height="48" width="48"></span>
-                    <span class="author vcard"><a class="url fn n" href="">Kester</a></span></span>
+                    <span class="play-count">{{ programme.comments.length }} Comments</span>.
+                    <span class="btn-like"> <span class="count"> {{ programme.views.length }} views</span></span>.
+                    <span class="byline"><span class="svg-icon"><img alt="" :src="oapSrc + programme.oap.image" class="avatar avatar-48 photo" height="48" width="48"></span>
+                    <span class="author vcard"><a class="url fn n" href="">{{ programme.oap.display_name }}</a></span></span>
                 </div>
             </header>
 
@@ -29,18 +29,17 @@
                         <h3>Programme Details</h3>
 
                         <p>
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero quas, ea maiores iusto modi vel voluptatibus.
-                            Perferendis ea incidunt dolorum iure dicta dolorem, doloremque ut, hic adipisci voluptate atque reprehenderit?
+                            {{ programme.details }}
                         </p>
 
 
                         <h3>Previous Episodes</h3>
-                        <div class="row">
-                            <div class=" col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3">
+                        <div class="row" v-if="programme.episodes">
+                            <div class=" col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3" v-for="episode in programme.episodes" :key="episode.id">
                                 <article class="block-loop-item station type-station status-publish has-post-thumbnail hentry genre-pop station_tag-youtube entry">
                                     <figure class="post-thumbnail">
                                         <a class="post-thumbnail-inner" href="#" aria-hidden="true" tabindex="-1">
-                                            <img width="1000" height="1250" src="http://flatfull.com/wp/bepop/wp-content/uploads/2019/06/pexels-photo-1030895.jpeg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" sizes="(max-width: 1000px) 100vw, 1000px">
+                                            <img width="1000" height="1250" :src="episodeSrc + episode.image" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" sizes="(max-width: 1000px) 100vw, 1000px">
                                         </a>
                                         <div class="entry-action">
                                             <span class="btn-like"></span>
@@ -51,10 +50,10 @@
 
                                     <header class="entry-header">
                                         <h3 class="entry-title">
-                                            <a href="#" rel="bookmark">Travel Gist</a>
+                                            <router-link :to="{ name: 'Episode', params: { programmeSlug: programme.slug, episodeSlug: episode.slug } }">  {{ episdoe.title }}</router-link>
                                         </h3>
                                         <div class="entry-meta">
-                                            <span class="byline"><a href=""><span class="author vcard">Episode 1</span></a></span>
+                                            <span class="byline"><a href=""><span class="author vcard">{{ episode.oap_id }}</span></a></span>
                                         </div>
                                     </header>
                                 </article>
@@ -63,9 +62,9 @@
                     </div>
 
                     <div class="comments-area">
-                        <ol class="comment-list">
+                        <ol class="comment-list" v-if="programme.comments">
 					        <li class="comment byuser even thread-even depth-1 parent">
-                                <article id="div-comment-87" class="comment-body">
+                                <article class="comment-body">
                                     <footer class="comment-meta">
                                         <div class="comment-author vcard">
                                             <img alt="" src="http://0.gravatar.com/avatar/ff7f090e3d537b2106e5e0b4277459c3?s=96&amp;d=mm&amp;r=g" class="avatar avatar-96 photo" height="96" width="96"><b class="fn">kester</b> <span class="says">says:</span>
@@ -158,11 +157,33 @@
 
 <script>
 import Advert from '../components/Advert'
+import axios from 'axios'
 
 export default {
     name: 'Programme',
     components: {
         Advert
+    },
+    data () {
+        return {
+            programme: {},
+            src: '/images/programmes/',
+            oapSrc: '/images/oaps/',
+            episodeSrc: '/images/episodes'
+        }
+    },
+    methods: {
+        getProgramme () {
+            axios.get('/api/programme/${this.$route.params.slug}')
+                .then(res => {
+                    Object.keys(res.data).map(key => {
+                        this.programme[key] = res.data[key]
+                    })
+                })
+                .catch(err => {
+                    const error = err
+                })
+        }
     },
     metaInfo: {
         title: 'Programme title'

@@ -119,7 +119,7 @@
 
     <script src='{{ asset('js/jquery.blockUI.min.js') }}'></script>
     <script src='{{ asset('js/pjax.min.js') }}'></script>
-    {{-- <script src='{{ asset('js/loop.min.js') }}'></script> --}}
+    <script src='{{ asset('js/loop.min.js') }}'></script>
     <script src='{{ asset('js/play.min.js') }}'></script>
     <script src='{{ asset('js/site.min.js') }}'></script>
 

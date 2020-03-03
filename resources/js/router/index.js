@@ -13,13 +13,13 @@ const routes = [
             import ('../views/Home.vue')
     },
     {
-        path: '/programme/:title',
+        path: '/programme/:slug',
         name: 'Programme',
         component: () =>
             import ('../views/Programme.vue')
     },
     {
-        path: '/programme/:title/:episode',
+        path: '/programme/:ProgrammeSlug/:episodeSlug',
         name: 'Episode',
         component: () =>
             import ('../views/Episode.vue')
@@ -31,7 +31,7 @@ const routes = [
             import ('../views/Blog.vue')
     },
     {
-        path: '/profile/:oapName',
+        path: '/profile/:slug',
         name: 'Profile',
         component: () =>
             import ('../views/OAPProfile.vue')

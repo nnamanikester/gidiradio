@@ -148,7 +148,7 @@ class ApiGetSpaController extends Controller
         return response()->json($response);
     }
 
-    public function comments(BlogComment $blog, EpisdoeComment $episode, ProgrammeComment $programme)
+    public function comments(BlogComment $blog, EpisodeComment $episode, ProgrammeComment $programme)
     {
         header('Access-Control-Allow-Origin: *');
         $blogs = $blog->latest()->get();

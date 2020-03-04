@@ -188,9 +188,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 
@@ -221,8 +218,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  metaInfo: {
-    title: 'Programme title'
+  metaInfo: function metaInfo() {
+    return {
+      title: this.programme.title ? this.programme.title : ''
+    };
   },
   mounted: function mounted() {
     this.getProgramme();
@@ -503,37 +502,6 @@ var render = function() {
                                             )
                                           ],
                                           1
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          { staticClass: "entry-meta" },
-                                          [
-                                            _c(
-                                              "span",
-                                              { staticClass: "byline" },
-                                              [
-                                                _c(
-                                                  "a",
-                                                  { attrs: { href: "" } },
-                                                  [
-                                                    _c(
-                                                      "span",
-                                                      {
-                                                        staticClass:
-                                                          "author vcard"
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          _vm._s(episode.oap_id)
-                                                        )
-                                                      ]
-                                                    )
-                                                  ]
-                                                )
-                                              ]
-                                            )
-                                          ]
                                         )
                                       ]
                                     )

@@ -52,9 +52,6 @@
                                         <h3 class="entry-title">
                                             <router-link :to="{ name: 'Episode', params: { programmeSlug: programme.slug, episodeSlug: episode.slug } }">  {{ episode.title }}</router-link>
                                         </h3>
-                                        <div class="entry-meta">
-                                            <span class="byline"><a href=""><span class="author vcard">{{ episode.oap_id }}</span></a></span>
-                                        </div>
                                     </header>
                                 </article>
                             </div>
@@ -165,8 +162,10 @@ export default {
                 })
         }
     },
-    metaInfo: {
-        title: `${this.programme.title ? this.programme.title : ''}`
+    metaInfo () {
+        return {
+            title: this.programme.title ? this.programme.title : ''
+        }
     },
     mounted () {
         this.getProgramme()

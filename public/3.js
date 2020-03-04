@@ -54,6 +54,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Advert__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Advert */ "./resources/js/components/Advert.vue");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -189,28 +191,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -220,19 +201,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      programme: {},
+      programme: [],
+      moment: moment__WEBPACK_IMPORTED_MODULE_2___default.a,
       src: '/images/programmes/',
       oapSrc: '/images/oaps/',
-      episodeSrc: '/images/episodes'
+      episodeSrc: '/images/programmes/episodes/'
     };
   },
   methods: {
     getProgramme: function getProgramme() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/programme/${this.$route.params.slug}').then(function (res) {
-        Object.keys(res.data).map(function (key) {
-          _this.programme[key] = res.data[key];
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/programme/".concat(this.$route.params.slug)).then(function (res) {
+        res.data.forEach(function (item) {
+          _this.programme = item;
         });
       })["catch"](function (err) {
         var error = err;
@@ -241,6 +223,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   metaInfo: {
     title: 'Programme title'
+  },
+  mounted: function mounted() {
+    this.getProgramme();
   }
 });
 
@@ -351,7 +336,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.programme
+  return _vm.programme.title
     ? _c(
         "article",
         {
@@ -512,8 +497,7 @@ var render = function() {
                                               },
                                               [
                                                 _vm._v(
-                                                  "  " +
-                                                    _vm._s(_vm.episdoe.title)
+                                                  "  " + _vm._s(episode.title)
                                                 )
                                               ]
                                             )
@@ -566,7 +550,49 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "comments-area" }, [
                   _vm.programme.comments
-                    ? _c("ol", { staticClass: "comment-list" }, [_vm._m(1)])
+                    ? _c(
+                        "ol",
+                        { staticClass: "comment-list" },
+                        _vm._l(_vm.programme.comments, function(comment) {
+                          return _c(
+                            "li",
+                            {
+                              key: comment.id,
+                              staticClass:
+                                "comment byuser even thread-even depth-1 parent"
+                            },
+                            [
+                              _c("article", { staticClass: "comment-body" }, [
+                                _c("footer", { staticClass: "comment-meta" }, [
+                                  _vm._m(1, true),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "comment-metadata" },
+                                    [
+                                      _c("time", [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm
+                                              .moment(comment.created_at)
+                                              .startOf("hour")
+                                              .fromNow()
+                                          )
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "comment-content" }, [
+                                  _c("p", [_vm._v(_vm._s(comment.body))])
+                                ])
+                              ])
+                            ]
+                          )
+                        }),
+                        0
+                      )
                     : _vm._e(),
                   _vm._v(" "),
                   _vm._m(2)
@@ -620,50 +646,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "li",
-      { staticClass: "comment byuser even thread-even depth-1 parent" },
-      [
-        _c("article", { staticClass: "comment-body" }, [
-          _c("footer", { staticClass: "comment-meta" }, [
-            _c("div", { staticClass: "comment-author vcard" }, [
-              _c("img", {
-                staticClass: "avatar avatar-96 photo",
-                attrs: {
-                  alt: "",
-                  src:
-                    "http://0.gravatar.com/avatar/ff7f090e3d537b2106e5e0b4277459c3?s=96&d=mm&r=g",
-                  height: "96",
-                  width: "96"
-                }
-              }),
-              _c("b", { staticClass: "fn" }, [_vm._v("kester")]),
-              _vm._v(" "),
-              _c("span", { staticClass: "says" }, [_vm._v("says:")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "comment-metadata" }, [
-              _c("time", [_vm._v("February 5, 2020 at 11:19 pm")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "comment-content" }, [
-            _c("p", [_vm._v("oujhpfrsdv")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "reply" }, [
-            _c(
-              "a",
-              {
-                staticClass: "comment-reply-link",
-                attrs: { rel: "nofollow", href: "#" }
-              },
-              [_vm._v("Reply")]
-            )
-          ])
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "comment-author vcard" }, [
+      _c("img", {
+        staticClass: "avatar avatar-96 photo",
+        attrs: {
+          alt: "",
+          src:
+            "http://0.gravatar.com/avatar/ff7f090e3d537b2106e5e0b4277459c3?s=96&d=mm&r=g",
+          height: "96",
+          width: "96"
+        }
+      }),
+      _c("b", { staticClass: "fn" }, [_vm._v("kester")]),
+      _vm._v(" "),
+      _c("span", { staticClass: "says" }, [_vm._v("says:")])
+    ])
   },
   function() {
     var _vm = this

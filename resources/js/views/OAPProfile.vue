@@ -66,6 +66,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name: 'OAPProfile',
     data: () => ({
@@ -73,6 +75,9 @@ export default {
     }),
     metaInfo: {
         title: 'OAP Profile'
+    }
+    mounted () {
+        
     }
 }
 </script>

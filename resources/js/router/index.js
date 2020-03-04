@@ -19,13 +19,13 @@ const routes = [
             import ('../views/Programme.vue')
     },
     {
-        path: '/programme/:ProgrammeSlug/:episodeSlug',
+        path: '/programme/:programmeSlug/:episodeSlug',
         name: 'Episode',
         component: () =>
             import ('../views/Episode.vue')
     },
     {
-        path: '/blog/:title',
+        path: '/blog/:slug',
         name: 'Blog',
         component: () =>
             import ('../views/Blog.vue')

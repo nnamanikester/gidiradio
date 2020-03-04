@@ -1,5 +1,5 @@
 <template>
-    <article v-if="programme" class="station type-station status-publish has-post-thumbnail hentry genre-country entry">
+    <article v-if="programme.title" class="station type-station status-publish has-post-thumbnail hentry genre-country entry">
 
         <div class="entry-header-container header-station">
 
@@ -50,7 +50,7 @@
 
                                     <header class="entry-header">
                                         <h3 class="entry-title">
-                                            <router-link :to="{ name: 'Episode', params: { programmeSlug: programme.slug, episodeSlug: episode.slug } }">  {{ episdoe.title }}</router-link>
+                                            <router-link :to="{ name: 'Episode', params: { programmeSlug: programme.slug, episodeSlug: episode.slug } }">  {{ episode.title }}</router-link>
                                         </h3>
                                         <div class="entry-meta">
                                             <span class="byline"><a href=""><span class="author vcard">{{ episode.oap_id }}</span></a></span>
@@ -63,44 +63,22 @@
 
                     <div class="comments-area">
                         <ol class="comment-list" v-if="programme.comments">
-					        <li class="comment byuser even thread-even depth-1 parent">
+					        <li class="comment byuser even thread-even depth-1 parent" v-for="comment in programme.comments" :key="comment.id">
                                 <article class="comment-body">
                                     <footer class="comment-meta">
                                         <div class="comment-author vcard">
                                             <img alt="" src="http://0.gravatar.com/avatar/ff7f090e3d537b2106e5e0b4277459c3?s=96&amp;d=mm&amp;r=g" class="avatar avatar-96 photo" height="96" width="96"><b class="fn">kester</b> <span class="says">says:</span>
                                         </div>
                                         <div class="comment-metadata">
-                                            <time>February 5, 2020 at 11:19 pm</time>
+                                            <time>{{ moment(comment.created_at).startOf('hour').fromNow() }}</time>
                                         </div>
                                     </footer>
                                     <div class="comment-content">
-                                        <p>oujhpfrsdv</p>
+                                        <p>{{ comment.body }}</p>
                                     </div>
 
-                                    <div class="reply"><a rel="nofollow" class="comment-reply-link" href="#">Reply</a></div>
+                                    <!-- <div class="reply"><a rel="nofollow" class="comment-reply-link" href="#">Reply</a></div> -->
                                 </article>
-
-                                <!-- <ol class="children">
-                                    <li class="comment byuser odd alt depth-2">
-                                        <article id="div-comment-88" class="comment-body">
-                                            <footer class="comment-meta">
-                                                <div class="comment-author vcard">
-                                                    <img alt="" src="http://0.gravatar.com/avatar/ff7f090e3d537b2106e5e0b4277459c3?s=96&amp;d=mm&amp;r=g" class="avatar avatar-96 photo" height="96" width="96"><b class="fn"><a href="#" rel="external nofollow ugc" class="url">kester</a></b> <span class="says">says:</span>
-                                                </div>
-
-                                                <div class="comment-metadata">
-                                                        <time>February 5, 2020 at 11:20 pm</time>
-                                                </div>
-                                            </footer>
-
-                                            <div class="comment-content">
-                                                <p>replie</p>
-                                            </div>
-
-                                            <div class="reply"><a rel="nofollow" class="comment-reply-link" href="#">Reply</a></div>
-                                        </article>
-                                    </li>
-                                </ol> -->
 
                             </li>
 		                </ol>
@@ -158,6 +136,7 @@
 <script>
 import Advert from '../components/Advert'
 import axios from 'axios'
+import moment from 'moment'
 
 export default {
     name: 'Programme',
@@ -166,18 +145,19 @@ export default {
     },
     data () {
         return {
-            programme: {},
+            programme: [],
+            moment,
             src: '/images/programmes/',
             oapSrc: '/images/oaps/',
-            episodeSrc: '/images/episodes'
+            episodeSrc: '/images/programmes/episodes/'
         }
     },
     methods: {
         getProgramme () {
-            axios.get('/api/programme/${this.$route.params.slug}')
+            axios.get(`/api/programme/${this.$route.params.slug}`)
                 .then(res => {
-                    Object.keys(res.data).map(key => {
-                        this.programme[key] = res.data[key]
+                    res.data.forEach(item => {
+                        this.programme = item
                     })
                 })
                 .catch(err => {
@@ -186,7 +166,10 @@ export default {
         }
     },
     metaInfo: {
-        title: 'Programme title'
+        title: `${this.programme.title ? this.programme.title : ''}`
+    },
+    mounted () {
+        this.getProgramme()
     }
 }
 </script>

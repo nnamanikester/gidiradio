@@ -24092,7 +24092,7 @@ var render = function() {
                   attrs: {
                     to: {
                       name: "Programme",
-                      params: { title: "the-return-of-xander" }
+                      params: { programmeSlug: "programme-1" }
                     }
                   }
                 },
@@ -24113,8 +24113,8 @@ var render = function() {
                     to: {
                       name: "Episode",
                       params: {
-                        title: "the-return-of-xander",
-                        episode: "episode-1"
+                        programmeSlug: "programme-1",
+                        episodeSlug: "episode-1"
                       }
                     }
                   }
@@ -24133,7 +24133,7 @@ var render = function() {
                 {
                   staticClass: "sub-ajax",
                   attrs: {
-                    to: { name: "Profile", params: { oapName: "john-kester" } }
+                    to: { name: "Profile", params: { slug: "john-kester" } }
                   }
                 },
                 [_vm._v("OAP Profile")]
@@ -24152,7 +24152,7 @@ var render = function() {
                   attrs: {
                     to: {
                       name: "Blog",
-                      params: { title: "the-best-soup-in-the-world" }
+                      params: { slug: "the-best-soup-in-the-world" }
                     }
                   }
                 },
@@ -41497,13 +41497,13 @@ var routes = [{
     return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ../views/Programme.vue */ "./resources/js/views/Programme.vue"));
   }
 }, {
-  path: '/programme/:ProgrammeSlug/:episodeSlug',
+  path: '/programme/:programmeSlug/:episodeSlug',
   name: 'Episode',
   component: function component() {
     return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../views/Episode.vue */ "./resources/js/views/Episode.vue"));
   }
 }, {
-  path: '/blog/:title',
+  path: '/blog/:slug',
   name: 'Blog',
   component: function component() {
     return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../views/Blog.vue */ "./resources/js/views/Blog.vue"));

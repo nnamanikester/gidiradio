@@ -121,6 +121,12 @@ class ApiGetSpaController extends Controller
         return response()->json($oap->where('slug', $slug)->with('programmes', 'episodes', 'socials')->get());
     }
 
+    public function single_page(Page $page, $slug)
+    {
+        header('Access-Control-Allow-Origin: *');
+        return response()->json($page->where('slug', $slug)->get());
+    }
+
     public function site_stats()
     {
         header('Access-Control-Allow-Origin: *');

@@ -23,7 +23,7 @@
 									<a data-pjax-state="" href="/" aria-current="page"><span>Home</span></a>
 								</li>
 								<li class="icon-book">
-									<router-link :to="{ name: 'Blog', params: { title: 'the-best-soup-in-the-world' }  }">News</router-link>
+									<router-link :to="{ name: 'Blog', params: { slug: 'blog-1' }  }">News</router-link>
 								</li>
 								<li class="icon-radio">
 									<router-link :to="{ name: 'About' }">About Us</router-link>
@@ -57,6 +57,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
     name: 'Header'

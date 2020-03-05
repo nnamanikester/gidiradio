@@ -34,7 +34,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: '404',
+  name: 'Error404',
   metaInfo: {
     title: '404 Not Found'
   }

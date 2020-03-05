@@ -73,7 +73,7 @@ const routes = [
             import ('../views/pages/Terms.vue')
     },
     {
-        path: '*',
+        path: '**',
         component: () =>
             import ('../views/404.vue')
     }

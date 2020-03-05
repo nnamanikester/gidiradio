@@ -55,10 +55,12 @@
 
         </div>
 	</article>
+    <Error404 v-else />
 </template>
 
 <script>
 import axios from 'axios'
+import Error404 from './404'
 
 export default {
     name: 'OAPProfile',
@@ -67,6 +69,9 @@ export default {
         oapSrc: '/images/oaps/',
         programmeSrc: '/images/programmes/'
     }),
+    components: {
+        Error404
+    },
     metaInfo () {
         return {
             title: this.oap.name ? this.oap.name : ''

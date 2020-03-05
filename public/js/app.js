@@ -41548,7 +41548,7 @@ var routes = [{
     return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ../views/pages/Terms.vue */ "./resources/js/views/pages/Terms.vue"));
   }
 }, {
-  path: '*',
+  path: '**',
   component: function component() {
     return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../views/404.vue */ "./resources/js/views/404.vue"));
   }

@@ -24,7 +24,7 @@
 
 <script>
 export default {
-    name: '404',
+    name: 'Error404',
     metaInfo: {
         title: '404 Not Found'
     }

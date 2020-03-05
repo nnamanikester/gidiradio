@@ -128,17 +128,20 @@
 
         </div>
     </article>
+    <Error404 v-else />
 </template>
 
 <script>
 import Advert from '../components/Advert'
 import axios from 'axios'
 import moment from 'moment'
+import Error404 from './404'
 
 export default {
     name: 'Programme',
     components: {
-        Advert
+        Advert,
+        Error404
     },
     data () {
         return {

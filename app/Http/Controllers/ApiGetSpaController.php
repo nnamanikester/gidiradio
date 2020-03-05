@@ -20,6 +20,7 @@ use App\EpisodeView;
 use App\EpisodePlay;
 use App\ProgrammeComment;
 use App\ProgrammeView;
+use App\Page;
 use Illuminate\Http\Request;
 
 class ApiGetSpaController extends Controller
@@ -88,6 +89,12 @@ class ApiGetSpaController extends Controller
     {
         header('Access-Control-Allow-Origin: *');
         return response()->json($ad->get());
+    }
+
+    public function pages(Page $page) 
+    {
+        header('Access-Control-Allow-Origin: *');
+        return response()->json($page->get());
     }
 
     public function single_programme($slug, Programme $programme)

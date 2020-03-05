@@ -31,12 +31,14 @@ Route::get('/header-images', 'ApiGetSpaController@header_images');
 Route::get('/adverts', 'ApiGetSpaController@adverts');
 Route::get('/site-stats', 'ApiGetSpaController@site_stats');
 Route::get('/comments', 'ApiGetSpaController@comments');
+Route::get('/pages', 'ApiGetSpaController@pages');
 
 // Single GET APIs
 Route::get('/programme/{slug}', 'ApiGetSpaController@single_programme');
 Route::get('/episode/{slug}', 'ApiGetSpaController@single_episode');
 Route::get('/blog/{slug}', 'ApiGetSpaController@single_blog');
 Route::get('/oap/{slug}', 'ApiGetSpaController@single_oap');
+Route::get('/page/{slug}', 'ApiGetSpaController@single_page');
 
 // CREATE APIs
 Route::post('/role/create', 'ApiPostSpaController@role');

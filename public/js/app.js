@@ -41518,34 +41518,10 @@ var routes = [{
     return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../views/SearchResult.vue */ "./resources/js/views/SearchResult.vue"));
   }
 }, {
-  path: '/contact',
-  name: 'Contact',
+  path: '/page/:slug',
+  name: 'Page',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ../views/pages/Contact.vue */ "./resources/js/views/pages/Contact.vue"));
-  }
-}, {
-  path: '/about',
-  name: 'About',
-  component: function component() {
-    return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../views/pages/About.vue */ "./resources/js/views/pages/About.vue"));
-  }
-}, {
-  path: '/dmca',
-  name: 'DMCA',
-  component: function component() {
-    return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ../views/pages/DMCA.vue */ "./resources/js/views/pages/DMCA.vue"));
-  }
-}, {
-  path: '/privacy-policy',
-  name: 'Policy',
-  component: function component() {
-    return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ../views/pages/Policy.vue */ "./resources/js/views/pages/Policy.vue"));
-  }
-}, {
-  path: '/terms-of-use',
-  name: 'Terms',
-  component: function component() {
-    return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ../views/pages/Terms.vue */ "./resources/js/views/pages/Terms.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(13), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ../views/pages/Page.vue */ "./resources/js/views/pages/Page.vue"));
   }
 }, {
   path: '**',

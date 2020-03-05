@@ -1,8 +1,8 @@
 <template>
-  <article class="page type-page status-publish hentry entry">
+  <article class="page type-page status-publish hentry entry" v-if="page.title">
     <div class="entry-header-container">
       <header class="entry-header">
-        <h1 class="entry-title">Privacy Policy</h1>
+        <h1 class="entry-title">About Us</h1>
       </header>
     </div>
 
@@ -74,4 +74,38 @@
       <h3>Industry regulatory disclosure requirements</h3>
     </div>
   </article>
+  <Error404 v-else />
 </template>
+
+<script>
+import axios from 'axios'
+import Error404 from './404'
+
+export default {
+  name: 'Page',
+  components: {
+    Error404
+  },
+  data () {
+    return {
+      page: []
+    }
+  },
+  methods: {
+    getPage () {
+      axios.get()
+        .then(res => {
+          res.data.forEach(item => {
+            this.page = item
+          })
+        })
+        .catch(err => {
+          const error = err
+        })
+    }
+  },
+  metaInfo () {
+    title: this.page.title ? this.page.title : ''
+  }
+}
+</script>

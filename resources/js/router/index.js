@@ -43,34 +43,10 @@ const routes = [
             import ('../views/SearchResult.vue')
     },
     {
-        path: '/contact',
-        name: 'Contact',
+        path: '/page/:slug',
+        name: 'Page',
         component: () =>
-            import ('../views/pages/Contact.vue')
-    },
-    {
-        path: '/about',
-        name: 'About',
-        component: () =>
-            import ('../views/pages/About.vue')
-    },
-    {
-        path: '/dmca',
-        name: 'DMCA',
-        component: () =>
-            import ('../views/pages/DMCA.vue')
-    },
-    {
-        path: '/privacy-policy',
-        name: 'Policy',
-        component: () =>
-            import ('../views/pages/Policy.vue')
-    },
-    {
-        path: '/terms-of-use',
-        name: 'Terms',
-        component: () =>
-            import ('../views/pages/Terms.vue')
+            import ('../views/pages/Page.vue')
     },
     {
         path: '**',

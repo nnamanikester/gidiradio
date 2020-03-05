@@ -186,7 +186,6 @@ __webpack_require__.r(__webpack_exports__);
         res.data.forEach(function (item) {
           _this.episode = item;
         });
-        console.log(_this.episode);
       })["catch"](function (err) {
         var error = err;
       });

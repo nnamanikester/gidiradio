@@ -4,7 +4,7 @@
             <div class="container">
                 <ul class="nav">
                     <li>
-                        <router-link class="sub-ajax"  :to="{ name: 'Programme', params: { programmeSlug: 'programme-1' } }">Return</router-link>
+                        <router-link class="sub-ajax"  :to="{ name: 'Programme', params: { slug: 'programme-1' } }">Return</router-link>
                     </li>
                     <li>
                         <router-link class="sub-ajax"  :to="{ name: 'Episode', params: { programmeSlug: 'programme-1', episodeSlug: 'episode-1' } }">Episode 1</router-link>

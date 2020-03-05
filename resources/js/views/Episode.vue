@@ -129,7 +129,6 @@ export default {
                     res.data.forEach(item => {
                         this.episode = item
                     })
-                    console.log(this.episode)
                 })
                 .catch(err => {
                     const error = err

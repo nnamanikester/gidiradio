@@ -24090,10 +24090,7 @@ var render = function() {
                 {
                   staticClass: "sub-ajax",
                   attrs: {
-                    to: {
-                      name: "Programme",
-                      params: { programmeSlug: "programme-1" }
-                    }
+                    to: { name: "Programme", params: { slug: "programme-1" } }
                   }
                 },
                 [_vm._v("Return")]
@@ -41506,7 +41503,7 @@ var routes = [{
   path: '/blog/:slug',
   name: 'Blog',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../views/Blog.vue */ "./resources/js/views/Blog.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(13), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ../views/Blog.vue */ "./resources/js/views/Blog.vue"));
   }
 }, {
   path: '/profile/:slug',

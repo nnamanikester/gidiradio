@@ -1,19 +1,19 @@
 <template>
-    <article class="station type-station status-publish has-post-thumbnail hentry genre-country entry">
+    <article class="station type-station status-publish has-post-thumbnail hentry genre-country entry" v-if="blog.title">
 
         <div class="entry-header-container header-station">
 
             <figure class="post-thumbnail">
-                <img width="1000" height="1164" src="http://flatfull.com/wp/bepop/wp-content/uploads/2019/06/pexels-photo-2092474.jpeg" class="attachment-full size-full wp-post-image" alt="" style="object-position: 50% 100%" sizes="(max-width: 1000px) 100vw, 1000px">
+                <img width="1000" height="1164" :src="blogSrc + blog.image" class="attachment-full size-full wp-post-image" alt="" style="object-position: 50% 100%" sizes="(max-width: 1000px) 100vw, 1000px">
             </figure>
 
             <header class="entry-header">
-                <h1 class="entry-title">Blog Title</h1>
+                <h1 class="entry-title">{{ blog.title }}</h1>
                 <div class="entry-meta">
-                    <span class="play-count">1.1K Comments</span>.
-                    <span class="btn-like"> <span class="count"> 9 views</span></span>.
-                    <span class="byline"><span class="svg-icon"><img alt="" src="http://flatfull.com/wp/bepop/wp-content/uploads/2019/06/Adam-Stefancik_avatar-96x96.jpeg" class="avatar avatar-48 photo" height="48" width="48"></span>
-                    <span class="author vcard"><a class="url fn n" href="">Kester</a></span></span>
+                    <span class="play-count">{{ blog.comments.length }} Comments</span>.
+                    <span class="btn-like"> <span class="count"> {{ blog.views.length }} views</span></span>.
+                    <span class="byline"><span class="svg-icon"><img alt="" :src="userSrc + blog.user.image" class="avatar avatar-48 photo" height="48" width="48"></span>
+                    <span class="author vcard"><a class="url fn n" href="">{{ blog.user.username }}</a></span></span>
                 </div>
             </header>
 
@@ -28,53 +28,27 @@
                         <h3>Episode Details</h3>
 
                         <p>
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero quas, ea maiores iusto modi vel voluptatibus.
-                            Perferendis ea incidunt dolorum iure dicta dolorem, doloremque ut, hic adipisci voluptate atque reprehenderit?
+                            {{ blog.details }}
                         </p>
 
                     </div>
 
                     <div class="comments-area">
-                        <ol class="comment-list">
-					        <li class="comment byuser even thread-even depth-1 parent">
+                        <ol class="comment-list" v-if="blog.comments">
+					        <li class="comment byuser even thread-even depth-1 parent" v-for="comment in blog.comments" :key="comment.id">
                                 <article id="div-comment-87" class="comment-body">
                                     <footer class="comment-meta">
                                         <div class="comment-author vcard">
-                                            <img alt="" src="http://0.gravatar.com/avatar/ff7f090e3d537b2106e5e0b4277459c3?s=96&amp;d=mm&amp;r=g" class="avatar avatar-96 photo" height="96" width="96"><b class="fn">kester</b> <span class="says">says:</span>
+                                            <img alt="" src="http://0.gravatar.com/avatar/ff7f090e3d537b2106e5e0b4277459c3?s=96&amp;d=mm&amp;r=g" class="avatar avatar-96 photo" height="96" width="96"><b class="fn">{{ comment.name }}</b> <span class="says">says:</span>
                                         </div>
                                         <div class="comment-metadata">
-                                            <time>February 5, 2020 at 11:19 pm</time>
+                                            <time>{{ moment(comment.created_at).startOf('hour').fromNow() }}</time>
                                         </div>
                                     </footer>
                                     <div class="comment-content">
-                                        <p>oujhpfrsdv</p>
+                                        <p>{{ comment.body }}</p>
                                     </div>
-
-                                    <div class="reply"><a rel="nofollow" class="comment-reply-link" href="#">Reply</a></div>
                                 </article>
-
-                                <!-- <ol class="children">
-                                    <li class="comment byuser odd alt depth-2">
-                                        <article id="div-comment-88" class="comment-body">
-                                            <footer class="comment-meta">
-                                                <div class="comment-author vcard">
-                                                    <img alt="" src="http://0.gravatar.com/avatar/ff7f090e3d537b2106e5e0b4277459c3?s=96&amp;d=mm&amp;r=g" class="avatar avatar-96 photo" height="96" width="96"><b class="fn"><a href="#" rel="external nofollow ugc" class="url">kester</a></b> <span class="says">says:</span>
-                                                </div>
-
-                                                <div class="comment-metadata">
-                                                        <time>February 5, 2020 at 11:20 pm</time>
-                                                </div>
-                                            </footer>
-
-                                            <div class="comment-content">
-                                                <p>replie</p>
-                                            </div>
-
-                                            <div class="reply"><a rel="nofollow" class="comment-reply-link" href="#">Reply</a></div>
-                                        </article>
-                                    </li>
-                                </ol> -->
-
                             </li>
 		                </ol>
                         <div id="respond" class="comment-respond">
@@ -130,14 +104,41 @@
 
 <script>
 import Advert from '../components/Advert'
+import axios from 'axios'
+import moment from 'moment'
 
 export default {
     name: 'Blog',
     components: {
         Advert
     },
-    metaInfo: {
-        title: 'Blog Title'
+    data () {
+        return {
+            blog: [],
+            blogSrc: '/images/blogs/',
+            userSrc: '/images/users/'
+        }
+    },
+    methods: {
+        getBlog () {
+            axios.get(`/api/blog/${this.$route.params.slug}`)
+                .then(res => {
+                    res.data.forEach(item => {
+                        this.blog = item
+                    })
+                })
+                .catch(err => {
+                    const error = err
+                })
+        }
+    },
+    mounted () {
+        this.getBlog()
+    },
+    metaInfo () {
+        return {
+            title: this.blog.title ? this.blog.title : ''
+        }
     }
 }
 </script>

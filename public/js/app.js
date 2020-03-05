@@ -41500,7 +41500,7 @@ var routes = [{
   path: '/programme/:programmeSlug/:episodeSlug',
   name: 'Episode',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../views/Episode.vue */ "./resources/js/views/Episode.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(13), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ../views/Episode.vue */ "./resources/js/views/Episode.vue"));
   }
 }, {
   path: '/blog/:slug',

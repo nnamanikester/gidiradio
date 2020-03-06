@@ -165,7 +165,11 @@ export default {
                     res.data.forEach(item => {
                         this.programme = item
                     })
-                    this.pageLoading = false
+                    if (this.programme.title) {
+                        this.pageLoading = false
+                    } else {
+                        this.pageLoading = false
+                    }
                 })
                 .catch(err => {
                     const error = err

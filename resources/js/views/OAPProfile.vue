@@ -1,5 +1,10 @@
 <template>
-    <article class="entry user" v-if="oap.name">
+<div v-if="pageLoading" class="justify-content-center loader">
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+    <article class="entry user" v-else-if="oap.name">
 
         <div class="entry-header-container">
             <header class="entry-header">
@@ -67,7 +72,8 @@ export default {
     data: () => ({
         oap: [],
         oapSrc: '/images/oaps/',
-        programmeSrc: '/images/programmes/'
+        programmeSrc: '/images/programmes/',
+        pageLoading: true
     }),
     components: {
         Error404
@@ -84,9 +90,16 @@ export default {
                     res.data.forEach(item => {
                         this.oap = item
                     })
+                    
+                    if (this.oap.title) {
+                        this.pageLoading = false
+                    } else {
+                        this.pageLoading = false
+                    }
                 })
                 .catch(er => {
                     const error = er
+                    this.pageLoading = false
                 })
         }
     },

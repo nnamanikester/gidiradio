@@ -17,6 +17,12 @@
       </p>
     </div>
   </article>
+  <div v-else-if="networkError" class="justify-content-center loader">
+    <div class="error">
+      <span class="error">X</span> Unable to load page <span class="error">X</span><br/>
+      <span class="text-primary">Check that you have an Internet connection</span>
+    </div>
+  </div>
   <Error404 v-else />
 </template>
 
@@ -32,6 +38,7 @@ export default {
   data () {
     return {
       page: [],
+      networkError: false,
       pageLoading: true
     }
   },
@@ -51,6 +58,7 @@ export default {
         .catch(err => {
           const error = err
           this.pageLoading = false
+          this.networkError = true
         })
     }
   },
@@ -68,6 +76,7 @@ export default {
     width: 100%;
     height: 100vh;
     text-align: center;
-    margin-top: 40vh;
+    margin-top: 30vh;
   }
+
 </style>

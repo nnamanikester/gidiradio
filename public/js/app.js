@@ -2041,8 +2041,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -25633,7 +25631,7 @@ var render = function() {
       _vm._v(" "),
       _c("Navbar"),
       _vm._v(" "),
-      _c("keep-alive", [_c("router-view")], 1),
+      _c("router-view"),
       _vm._v(" "),
       _vm._m(0)
     ],

@@ -2,9 +2,7 @@
     <div class="">
         <Header />
         <Navbar />
-        <keep-alive>
             <router-view />
-        </keep-alive>
         <div class="plyr-playlist player fixed-bottom plyr-theme-2" id="gidi-player">
             <audio id="playerss"></audio>
         </div>

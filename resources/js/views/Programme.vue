@@ -1,5 +1,10 @@
 <template>
-    <article v-if="programme.title" class="station type-station status-publish has-post-thumbnail hentry genre-country entry">
+<div v-if="pageLoading" class="justify-content-center loader">
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+    <article v-else-if="programme.title" class="station type-station status-publish has-post-thumbnail hentry genre-country entry">
 
         <div class="entry-header-container header-station">
 
@@ -149,7 +154,8 @@ export default {
             moment,
             src: '/images/programmes/',
             oapSrc: '/images/oaps/',
-            episodeSrc: '/images/programmes/episodes/'
+            episodeSrc: '/images/programmes/episodes/',
+            pageLoading: true
         }
     },
     methods: {
@@ -159,9 +165,11 @@ export default {
                     res.data.forEach(item => {
                         this.programme = item
                     })
+                    this.pageLoading = false
                 })
                 .catch(err => {
                     const error = err
+                    this.pageLoading = false
                 })
         }
     },

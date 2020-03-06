@@ -2144,17 +2144,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Header'
+  name: 'Header',
+  data: function data() {
+    return {
+      pages: []
+    };
+  },
+  methods: {
+    getPages: function getPages() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/pages').then(function (res) {
+        res.data.forEach(function (item) {
+          _this.pages.push(item);
+        });
+      })["catch"](function (err) {
+        var error = err;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getPages();
+  }
 });
 
 /***/ }),
@@ -25706,77 +25719,32 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
-                    _c(
-                      "li",
-                      { staticClass: "icon-radio" },
-                      [
-                        _c(
-                          "router-link",
-                          { attrs: { to: { name: "About" } } },
-                          [_vm._v("About Us")]
+                    _vm.pages.length != 0
+                      ? _c(
+                          "li",
+                          {
+                            staticClass: "icon-music  menu-item-has-children "
+                          },
+                          [
+                            _vm._m(3),
+                            _vm._v(" "),
+                            _c(
+                              "ul",
+                              { staticClass: "sub-menu" },
+                              _vm._l(_vm.pages, function(page) {
+                                return _c("li", { key: page.id }, [
+                                  _c(
+                                    "a",
+                                    { attrs: { href: "/page/" + page.slug } },
+                                    [_vm._v(_vm._s(page.title))]
+                                  )
+                                ])
+                              }),
+                              0
+                            )
+                          ]
                         )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      { staticClass: "icon-trending-up" },
-                      [
-                        _c(
-                          "router-link",
-                          { attrs: { to: { name: "Contact" } } },
-                          [_vm._v("Contact Us")]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      { staticClass: "icon-music  menu-item-has-children " },
-                      [
-                        _vm._m(3),
-                        _vm._v(" "),
-                        _c("ul", { staticClass: "sub-menu" }, [
-                          _c(
-                            "li",
-                            [
-                              _c(
-                                "router-link",
-                                { attrs: { to: { name: "DMCA" } } },
-                                [_vm._v("DMCA")]
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "li",
-                            [
-                              _c(
-                                "router-link",
-                                { attrs: { to: { name: "Terms" } } },
-                                [_vm._v("Terms Of Use")]
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "li",
-                            [
-                              _c(
-                                "router-link",
-                                { attrs: { to: { name: "Policy" } } },
-                                [_vm._v("Privacy Policy")]
-                              )
-                            ],
-                            1
-                          )
-                        ])
-                      ]
-                    )
+                      : _vm._e()
                   ]
                 )
               ])
@@ -43310,19 +43278,19 @@ var routes = [{
   path: '/programme/:programmeSlug/:episodeSlug',
   name: 'Episode',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../views/Episode.vue */ "./resources/js/views/Episode.vue"));
+    return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../views/Episode.vue */ "./resources/js/views/Episode.vue"));
   }
 }, {
   path: '/blog/:slug',
   name: 'Blog',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../views/Blog.vue */ "./resources/js/views/Blog.vue"));
+    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../views/Blog.vue */ "./resources/js/views/Blog.vue"));
   }
 }, {
   path: '/profile/:slug',
   name: 'Profile',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../views/OAPProfile.vue */ "./resources/js/views/OAPProfile.vue"));
+    return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../views/OAPProfile.vue */ "./resources/js/views/OAPProfile.vue"));
   }
 }, {
   path: '/search',
@@ -43334,7 +43302,7 @@ var routes = [{
   path: '/page/:slug',
   name: 'Page',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../views/pages/Page.vue */ "./resources/js/views/pages/Page.vue"));
+    return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../views/pages/Page.vue */ "./resources/js/views/pages/Page.vue"));
   }
 }, {
   path: '**',

@@ -25,18 +25,10 @@
 								<li class="icon-book">
 									<router-link :to="{ name: 'Blog', params: { slug: 'blog-1' }  }">News</router-link>
 								</li>
-								<li class="icon-radio">
-									<router-link :to="{ name: 'About' }">About Us</router-link>
-								</li>
-								<li class="icon-trending-up">
-									<router-link :to="{ name: 'Contact' }">Contact Us</router-link>
-								</li>
-								<li class="icon-music  menu-item-has-children ">
+								<li class="icon-music  menu-item-has-children " v-if="pages.length != 0">
 									<a href="#"><span>Pages</span></a>
 									<ul class="sub-menu">
-										<li><router-link :to="{ name: 'DMCA' }">DMCA</router-link></li>
-										<li><router-link :to="{ name: 'Terms' }">Terms Of Use</router-link></li>
-										<li><router-link :to="{ name: 'Policy' }">Privacy Policy</router-link></li>
+										<li v-for="page in pages" :key="page.id"><a :href="'/page/' + page.slug">{{ page.title }}</a></li>
 									</ul>
 								</li>
 							</ul>
@@ -60,7 +52,30 @@
 import axios from 'axios'
 
 export default {
-    name: 'Header'
+	name: 'Header',
+	data () {
+		return {
+			pages:  [],
+
+		}
+	},
+	methods: {
+		getPages () {
+			axios.get('/api/pages')
+				.then(res => {
+					res.data.forEach(item => {
+						this.pages.push(item)
+					})
+				})
+				.catch(err => {
+					const error = err
+				})
+		}
+	},
+	mounted () {
+		this.getPages()
+	}
+
 }
 </script>
 

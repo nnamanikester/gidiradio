@@ -1,5 +1,10 @@
 <template>
-    <article class="station type-station status-publish has-post-thumbnail hentry genre-country entry" v-if="blog.title">
+    <div v-if="pageLoading" class="justify-content-center loader">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <article class="station type-station status-publish has-post-thumbnail hentry genre-country entry" v-else-if="blog.title">
 
         <div class="entry-header-container header-station">
 
@@ -100,6 +105,12 @@
 
         </div>
     </article>
+    <div v-else-if="networkError" class="justify-content-center loader">
+        <div class="error">
+        <span class="error">X</span> Unable to load page <span class="error">X</span><br/>
+        <span class="text-primary">Check that you have an Internet connection</span>
+        </div>
+    </div>
     <Error404 v-else />
 </template>
 
@@ -120,7 +131,9 @@ export default {
             blog: [],
             blogSrc: '/images/blogs/',
             userSrc: '/images/users/',
-            moment
+            moment,
+            pageLoading: true,
+            networkError: false
         }
     },
     methods: {
@@ -130,9 +143,16 @@ export default {
                     res.data.forEach(item => {
                         this.blog = item
                     })
+                    if (this.blog.title) {
+                        this.pageLoading = false
+                    } else {
+                        this.pageLoading = false
+                    }
                 })
                 .catch(err => {
                     const error = err
+                    this.pageLoading = false
+                    this.networkError = true
                 })
         }
     },
@@ -146,3 +166,12 @@ export default {
     }
 }
 </script>
+
+<style>
+  .loader {
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    margin-top: 30vh;
+  }
+</style>

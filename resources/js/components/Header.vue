@@ -28,7 +28,7 @@
 								<li class="icon-music  menu-item-has-children " v-if="pages.length != 0">
 									<a href="#"><span>Pages</span></a>
 									<ul class="sub-menu">
-										<li v-for="page in pages" :key="page.id"><a :href="'/page/' + page.slug">{{ page.title }}</a></li>
+										<li v-for="page in pages" :key="page.id"><a :href="'/8page/' + page.slug">{{ page.title }}</a></li>
 									</ul>
 								</li>
 							</ul>

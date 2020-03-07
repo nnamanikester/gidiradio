@@ -25733,7 +25733,7 @@ var render = function() {
                                 return _c("li", { key: page.id }, [
                                   _c(
                                     "a",
-                                    { attrs: { href: "/page/" + page.slug } },
+                                    { attrs: { href: "/8page/" + page.slug } },
                                     [_vm._v(_vm._s(page.title))]
                                   )
                                 ])
@@ -43276,13 +43276,13 @@ var routes = [{
   path: '/programme/:programmeSlug/:episodeSlug',
   name: 'Episode',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../views/Episode.vue */ "./resources/js/views/Episode.vue"));
+    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../views/Episode.vue */ "./resources/js/views/Episode.vue"));
   }
 }, {
   path: '/blog/:slug',
   name: 'Blog',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../views/Blog.vue */ "./resources/js/views/Blog.vue"));
+    return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../views/Blog.vue */ "./resources/js/views/Blog.vue"));
   }
 }, {
   path: '/profile/:slug',
@@ -43294,13 +43294,13 @@ var routes = [{
   path: '/search',
   name: 'Search',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../views/SearchResult.vue */ "./resources/js/views/SearchResult.vue"));
+    return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../views/SearchResult.vue */ "./resources/js/views/SearchResult.vue"));
   }
 }, {
   path: '/page/:slug',
   name: 'Page',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../views/pages/Page.vue */ "./resources/js/views/pages/Page.vue"));
+    return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../views/pages/Page.vue */ "./resources/js/views/pages/Page.vue"));
   }
 }, {
   path: '**',

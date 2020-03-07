@@ -2,7 +2,8 @@
     <div class="">
         <Header />
         <Navbar />
-            <router-view />
+        <router-view />
+        <Footer />
         <div class="plyr-playlist player fixed-bottom plyr-theme-2" id="gidi-player">
             <audio id="playerss"></audio>
         </div>
@@ -13,6 +14,7 @@
 <script>
 import Header from './components/Header'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 import Schedule from 'node-schedule'
 import Plyr from 'plyr'
 
@@ -20,7 +22,8 @@ export default {
   name: 'App',
   components: {
       Header,
-      Navbar
+      Navbar,
+      Footer
   },
   data () {
       return {

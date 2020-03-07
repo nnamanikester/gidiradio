@@ -11,6 +11,9 @@ use App\Oap;
 use App\Blog;
 use App\HeaderImage;
 use App\User;
+use App\BlogComment;
+use App\EpisodeComment;
+use App\ProgrammeComment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -200,6 +203,51 @@ class ApiPostSpaController extends Controller
             'button_link' => $request->button_link,
             'image' => $request->image,
             'active' => $request->active
+        ]);
+        return response()->json($data);
+    }
+
+    public function blog_comment(BlogComment $comment, Request $request)
+    {
+        header('Access-Control-Allow-Origin: *');
+        $website = $request->website ? $request->website : 'gidiradio.com';
+        $data = $comment->create([
+            'blog_id' => $request->blog_id,
+            'name' => $request->name,
+            'body' => $request->body,
+            'email' => $request->email,
+            'website' => $website,
+            'approved' => 1
+        ]);
+        return response()->json($data);
+    }
+
+    public function programme_comment(ProgrammeComment $comment, Request $request)
+    {
+        header('Access-Control-Allow-Origin: *');
+        $website = $request->website ? $request->website : 'gidiradio.com';
+        $data = $comment->create([
+            'programme_id' => $request->programme_id,
+            'name' => $request->name,
+            'body' => $request->body,
+            'email' => $request->email,
+            'website' => $website,
+            'approved' => 1
+        ]);
+        return response()->json($data);
+    }
+
+    public function episode_comment(EpisodeComment $comment, Request $request)
+    {
+        header('Access-Control-Allow-Origin: *');
+        $website = $request->website ? $request->website : 'gidiradio.com';
+        $data = $comment->create([
+            'episode_id' => $request->episode_id,
+            'name' => $request->name,
+            'body' => $request->body,
+            'email' => $request->email,
+            'website' => $website,
+            'approved' => 1
         ]);
         return response()->json($data);
     }

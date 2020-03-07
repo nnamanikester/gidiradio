@@ -103,7 +103,7 @@
 		</div>
 		<!-- PAGE CONTENT ENDS HERE -->
 
-		<footer id="footer" class="site-footer">
+		{{-- <footer id="footer" class="site-footer">
 			<div class="container">
 				<div style="height:40px" aria-hidden="true" class="wp-block-spacer"></div>
 					<p style="color:#888888;font-size:12px;text-align:center" class="has-text-color">
@@ -112,7 +112,7 @@
                     <div style="height:40px" aria-hidden="true" class="wp-block-spacer"></div>
 
 			</div>
-		</footer>
+		</footer> --}}
 
     </div>
 

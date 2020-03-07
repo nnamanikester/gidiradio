@@ -49,6 +49,9 @@ Route::post('/asitdrops/create', 'ApiPostSpaController@asitdrops');
 Route::post('/oaps/create', 'ApiPostSpaController@oaps');
 Route::post('/blogs/create', 'ApiPostSpaController@blogs');
 Route::post('/header-images/create', 'ApiPostSpaController@header_images');
+Route::post('/programme/comment', 'ApiPostSpaController@programme_comment');
+Route::post('/blog/comment', 'ApiPostSpaController@blog_comment');
+Route::post('/episode/comment', 'ApiPostSpaController@episode_comment');
 
 
 //  UPDATE APIs

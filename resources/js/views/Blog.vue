@@ -59,30 +59,30 @@
                         <div id="respond" class="comment-respond">
 
                             <h2 class="comment-reply-title">Leave a Reply <small><a rel="nofollow" href="#">Cancel reply</a></small></h2>
-
-                            <form action="" method="post" class="comment-form">
+                            <div class="alert error" v-if="feedback">{{ feedback }}</div>
+                            <form action="" @submit.prevent="postComment" method="post" class="comment-form">
 
                                 <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span>Required fields are marked <span class="required">*</span></p>
                                 <p class="comment-form-comment">
                                     <label for="comment">Comment</label>
-                                    <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea>
+                                    <textarea v-model="comment.body" id="comment" cols="45" rows="8" ></textarea>
                                 </p>
 
                                 <label for="author">Name <span class="required">*</span></label>
-                                <input name="author" type="text" size="30" maxlength="245" required="required">
+                                <input v-model="comment.name" type="text" size="30">
 
                                 <label for="email">Email <span class="required">*</span></label>
-                                <input name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required="required">
+                                <input v-model="comment.email" type="email" size="30" aria-describedby="email-notes">
 
                                 <label for="url">Website</label>
-                                <input name="url" type="url" value="" size="30" maxlength="200">
+                                <input v-model="comment.website" type="url" value="" size="30" maxlength="200">
 
-                                <p class="comment-form-cookies-consent">
+                                <!-- <p class="comment-form-cookies-consent">
                                     <input name="cookies-consent" type="checkbox" value="yes">
                                     <label for="cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label>
-                                </p>
+                                </p> -->
                                 <p class="form-submit">
-                                    <input name="submit" type="submit" class="submit" value="Post Comment">
+                                    <button class="submit" @click="postComment">Post Comment</button>
                                 </p>
                             </form>
                         </div><!-- #respond -->
@@ -119,6 +119,7 @@ import Advert from '../components/Advert'
 import axios from 'axios'
 import moment from 'moment'
 import Error404 from './404'
+import FormData from 'form-data'
 
 export default {
     name: 'Blog',
@@ -133,7 +134,14 @@ export default {
             userSrc: '/images/users/',
             moment,
             pageLoading: true,
-            networkError: false
+            networkError: false,
+            comment: {
+                body: null,
+                name: null,
+                website: null,
+                email: null
+            },
+            feedback: null
         }
     },
     methods: {
@@ -154,6 +162,28 @@ export default {
                     this.pageLoading = false
                     this.networkError = true
                 })
+        },
+        postComment () {
+            if (!this.comment.body) return this.feedback = 'Comment is required!'
+            if (!this.comment.name) return this.feedback = 'Name is required!'
+            if (!this.comment.email) return this.feedback = 'Email is required!'
+            if (this.comment.body && this.comment.name && this.comment.email) {
+                const data = new FormData()
+                data.append('name', this.comment.name)
+                data.append('email', this.comment.email)
+                data.append('body', this.comment.body)
+                data.append('website', this.comment.website)
+                data.append('blog_id', this.blog.id)
+                axios.post(`/api/blog/comment`, data)
+                    .then(res => {
+                        this.blog.comments.unshift(res.data)
+                        console.log(res.data)
+                    })
+                    .catch(err => {
+                        const error = err
+                        console.log(err)
+                    })
+            }
         }
     },
     mounted () {

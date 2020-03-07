@@ -11,9 +11,11 @@
 					<label for="menu-state" id="icon-nav"><i class="icon-nav"><i></i></i></label>
 					<div class="site-brand">
 						<div class="site-logo">
-							<a data-pjax-state="" href="/">D~R</a>
+							<a data-pjax-state="" href="/">
+								<img :src="logoSrc + info.favico ? info.favico : ''" width="20" alt="">
+							</a>
 						</div>
-						<p class="site-title"><a href="/" data-pjax-state="" rel="home">GidiRadio</a></p>
+						<p class="site-title"><a href="/" data-pjax-state="" rel="home">{{ info.site_name ? info.site_name : '' }}</a></p>
 					</div>
 
 					<nav id="site-navigation" class="main-navigation">
@@ -50,13 +52,15 @@
 
 <script>
 import axios from 'axios'
+import db from '../database/db'
 
 export default {
 	name: 'Header',
 	data () {
 		return {
 			pages:  [],
-
+			info: db.siteInfo,
+			logoSrc: '/images/site-info/'
 		}
 	},
 	methods: {

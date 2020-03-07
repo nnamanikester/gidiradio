@@ -2092,6 +2092,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _database_db__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../database/db */ "./resources/js/database/db.js");
+//
+//
 //
 //
 //
@@ -2143,11 +2146,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Header',
   data: function data() {
     return {
-      pages: []
+      pages: [],
+      info: _database_db__WEBPACK_IMPORTED_MODULE_1__["default"].siteInfo,
+      logoSrc: '/images/site-info/'
     };
   },
   methods: {
@@ -25684,7 +25690,27 @@ var render = function() {
         _c("div", { staticClass: "site-navbar" }, [
           _vm._m(0),
           _vm._v(" "),
-          _vm._m(1),
+          _c("div", { staticClass: "site-brand" }, [
+            _c("div", { staticClass: "site-logo" }, [
+              _c("a", { attrs: { "data-pjax-state": "", href: "/" } }, [
+                _c("img", {
+                  attrs: {
+                    src: _vm.logoSrc + _vm.info.favico ? _vm.info.favico : "",
+                    width: "20",
+                    alt: ""
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "site-title" }, [
+              _c(
+                "a",
+                { attrs: { href: "/", "data-pjax-state": "", rel: "home" } },
+                [_vm._v(_vm._s(_vm.info.site_name ? _vm.info.site_name : ""))]
+              )
+            ])
+          ]),
           _vm._v(" "),
           _c(
             "nav",
@@ -25698,7 +25724,7 @@ var render = function() {
                   "ul",
                   { staticClass: "main-menu nav", attrs: { id: "menu-main" } },
                   [
-                    _vm._m(2),
+                    _vm._m(1),
                     _vm._v(" "),
                     _c(
                       "li",
@@ -25724,7 +25750,7 @@ var render = function() {
                             staticClass: "icon-music  menu-item-has-children "
                           },
                           [
-                            _vm._m(3),
+                            _vm._m(2),
                             _vm._v(" "),
                             _c(
                               "ul",
@@ -25749,7 +25775,7 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _vm._m(4)
+          _vm._m(3)
         ])
       ])
     ])
@@ -25762,24 +25788,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "menu-state", id: "icon-nav" } }, [
       _c("i", { staticClass: "icon-nav" }, [_c("i")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "site-brand" }, [
-      _c("div", { staticClass: "site-logo" }, [
-        _c("a", { attrs: { "data-pjax-state": "", href: "/" } }, [
-          _vm._v("D~R")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "site-title" }, [
-        _c("a", { attrs: { href: "/", "data-pjax-state": "", rel: "home" } }, [
-          _vm._v("GidiRadio")
-        ])
-      ])
     ])
   },
   function() {
@@ -43242,6 +43250,56 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/database/db.js":
+/*!*************************************!*\
+  !*** ./resources/js/database/db.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+var siteInfo = {
+  id: null,
+  site_name: null,
+  logo: null,
+  favico: null,
+  link: null,
+  email: null,
+  phone: null,
+  footer_text: null,
+  signboard_title: null,
+  signboard_button_text: null,
+  signboard_button_link: null,
+  signboard_image: null,
+  default_thumbnail: null,
+  tag_line: null,
+  facebook: null,
+  twitter: null,
+  instagram: null,
+  radio_station: null,
+  created_at: null,
+  updated_at: null
+};
+axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/site-settings').then(function (res) {
+  res.data.forEach(function (item) {
+    Object.keys(item).map(function (key) {
+      siteInfo[key] = item[key];
+    });
+  });
+})["catch"](function (err) {
+  var error = err;
+});
+var db = {
+  siteInfo: siteInfo
+};
+/* harmony default export */ __webpack_exports__["default"] = (db);
+
+/***/ }),
+
 /***/ "./resources/js/router/index.js":
 /*!**************************************!*\
   !*** ./resources/js/router/index.js ***!
@@ -43276,13 +43334,13 @@ var routes = [{
   path: '/programme/:programmeSlug/:episodeSlug',
   name: 'Episode',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../views/Episode.vue */ "./resources/js/views/Episode.vue"));
+    return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../views/Episode.vue */ "./resources/js/views/Episode.vue"));
   }
 }, {
   path: '/blog/:slug',
   name: 'Blog',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../views/Blog.vue */ "./resources/js/views/Blog.vue"));
+    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../views/Blog.vue */ "./resources/js/views/Blog.vue"));
   }
 }, {
   path: '/profile/:slug',

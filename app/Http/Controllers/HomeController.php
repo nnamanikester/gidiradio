@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Blog;
+use App\Programme;
+use App\Episode;
+use App\Asitdrop;
+use App\HeaderImage;
+
 class HomeController extends Controller
 {
     /**
@@ -23,7 +29,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+      $header_images = HeaderImage::where('active', 1)->orderBy('updated_at', 'DESC')->limit(10)->get();
+      $programmes = Programme::orderBy('updated_at', 'DESC')->limit(20)->get();
+      $episodes = Episode::orderBy('updated_at', 'DESC')->limit(20)->get();
+      $asitdrops = Asitdrop::orderBy('created_at', 'DESC')->limit(20)->get();
+      $blogs = Blog::orderBy('updated_at', 'DESC')->limit(20)->get();
+
+      return view('welcome', compact('header_images', 'programmes', 'episodes', 'asitdrops', 'blogs'));
     }
     // public function login()
     // {

@@ -63,76 +63,40 @@
 @section('content')
 <div id="welcome">
 <article class="status-publish has-post-thumbnail hentry entry hide-title">
-    <div class="entry-header-container">
-        <header class="entry-header">
-            <h1 class="entry-title">Discover</h1>
-        </header>
-        <figure class="post-thumbnail">
-            <a class="post-thumbnail-inner" href="index.html" aria-hidden="true" tabindex="-1">
-                <img width="1" height="1" src="{{ asset('images/artist/david.jpeg') }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" style="object-position: 50%" data-pos-y="" />
-            </a>
-        </figure>
-    </div>
-
 
 <div class="entry-content">
     <div class="wp-block-loop wp-block-loop-page slick-dots-right slick-alignfull alignfull" >
         <div class="row" data-plugin="slick" data-option="{ slidesToShow: 1, slidesToScroll: 1, infinite: true, dots: true, arrows:false, fade: true, autoplay: true}">
 
+            @foreach ($header_images as $item)
+
             <div class=" col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <article class="status-publish has-post-thumbnail hentry entry">
                     <div class="entry-header-container">
                         <header class="entry-header">
-                            <h2 class="entry-title h1">Amazing songs</h2>		</header>
+                            <h2 class="entry-title h1">{{ $item->title }}</h2>		</header>
 
                             <figure class="post-thumbnail">
-                                <a class="post-thumbnail-inner" href="amazing-songs/index.html" aria-hidden="true" tabindex="-1">
-                                    <img width="1210" height="1300" src="{{ asset('images/header/michael.jpeg') }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" style="object-position: 50%" data-pos-y="" sizes="(max-width: 1210px) 100vw, 1210px" />
+                                <a class="post-thumbnail-inner" href="{{ $item->button_link }}" aria-hidden="true" tabindex="-1">
+                                    <img width="1210" height="1300" src="{{ asset('images/header/' . $item->image) }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" style="object-position: 50%" data-pos-y="" sizes="(max-width: 1210px) 100vw, 1210px" />
                                 </a>
                             </figure>
                     </div>
                     <div class="entry-content">
-                        <p>Ac porttitor et dui viverra </p>
+                        <p>{{ $item->content }} </p>
 
                         <div style="height:30px" aria-hidden="true" class="wp-block-spacer"></div>
 
-
-
                         <div class="wp-block-button">
-                            <a class="wp-block-button__link has-text-color has-very-dark-gray-color has-background" href="#" style="background-color:#ffffff">New arrival</a>
+                        <a class="wp-block-button__link has-background has-vivid-green-cyan-background-color" href="{{ $item->button_link }}">{{ $item->button_text }}</a>
                         </div>
                     </div>
                     <footer class="entry-footer"></footer>
                 </article>
             </div>
 
-            <div class=" col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <article class="status-publish has-post-thumbnail hentry entry">
-                    <div class="entry-header-container">
-                        <header class="entry-header">
-                            <h2 class="entry-title h1">Bepop top charts</h2>		</header>
+            @endforeach
 
-                        <figure class="post-thumbnail">
-                            <a class="post-thumbnail-inner" href="bepop-top-charts/index.html" aria-hidden="true" tabindex="-1">
-                                <img width="1000" height="1500" src="{{ asset('images/header/john.jpeg') }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" style="object-position: 50%" data-pos-y="" sizes="(max-width: 1000px) 100vw, 1000px" />
-                            </a>
-                        </figure>
-
-                    </div>
-
-                    <div class="entry-content">
-
-                        <p>Nunc turpis sociis et dui viverra tortor et lorem</p>
-
-                        <div style="height:30px" aria-hidden="true" class="wp-block-spacer"></div>
-
-                        <div class="wp-block-button">
-                            <a class="wp-block-button__link has-background has-vivid-green-cyan-background-color" href="#">Vote the best</a>
-                        </div>
-                    </div>
-                    <footer class="entry-footer"></footer>
-                </article>
-            </div>
         </div>
     </div>
 
@@ -142,7 +106,7 @@
     <div class="wp-block-loop wp-block-loop-station  align" >
         <div class="row" data-plugin="slick" data-option="{ slidesToShow: 6, slidesToScroll: 1, infinite: false, responsive: [ { breakpoint: 920, settings: { slidesToShow: 4 } }, { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 576, settings: { slidesToShow: 2 } } ] }">
 
-            <!-- AS IT DROPS ITEM STARTS HERE -->
+            <!-- Programmes -->
             <div class=" col-6 col-sm-4 col-md-3 col-lg-2-4 col-xl-2">
                 <article class="block-loop-item post-476 station type-station status-publish has-post-thumbnail hentry genre-pop station_tag-youtube entry">
                     <figure class="post-thumbnail">
@@ -158,102 +122,7 @@
                     </header>
                 </article>
             </div>
-            <!-- FEATURED ITEM ENDS HERE -->
-
-
-            <!-- FEATURED ITEM STARTS HERE -->
-            <div class=" col-6 col-sm-4 col-md-3 col-lg-2-4 col-xl-2">
-                <article class="block-loop-item post-476 station type-station status-publish has-post-thumbnail hentry genre-pop station_tag-youtube entry">
-                    <figure class="post-thumbnail">
-                        <a class="post-thumbnail-inner" href="{{ url('/programme/programme-title') }}" aria-hidden="true" tabindex="-1">
-                            <img width="1000" height="1250" src="{{ asset('images/programmes/michael.jpeg') }}" class="attachment-post-thumbnail size-post-thumbnail" alt="" sizes="(max-width: 1000px) 100vw, 1000px" />
-                        </a>
-                    </figure>
-
-                    <header class="entry-header">
-                        <h3 class="entry-title">
-                            <a href="{{ url('/programme/programme-title') }}" rel="bookmark">The Best </a>
-                        </h3>
-                    </header>
-                </article>
-            </div>
-            <!-- FEATURED ITEM ENDS HERE -->
-
-
-            <!-- FEATURED ITEM STARTS HERE -->
-            <div class=" col-6 col-sm-4 col-md-3 col-lg-2-4 col-xl-2">
-                <article class="block-loop-item post-476 station type-station status-publish has-post-thumbnail hentry genre-pop station_tag-youtube entry">
-                    <figure class="post-thumbnail">
-                        <a class="post-thumbnail-inner" href="{{ url('/programme/programme-title') }}" aria-hidden="true" tabindex="-1">
-                            <img width="1000" height="1250" src="{{ asset('images/programmes/david.jpeg') }}" class="attachment-post-thumbnail size-post-thumbnail" alt="" sizes="(max-width: 1000px) 100vw, 1000px" />
-                        </a>
-                    </figure>
-
-                    <header class="entry-header">
-                        <h3 class="entry-title">
-                            <a href="{{ url('/programme/programme-title') }}" rel="bookmark">Girls like you MTV</a>
-                        </h3>
-                    </header>
-                </article>
-            </div>
-            <!-- FEATURED ITEM ENDS HERE -->
-
-
-            <!-- FEATURED ITEM STARTS HERE -->
-            <div class=" col-6 col-sm-4 col-md-3 col-lg-2-4 col-xl-2">
-                <article class="block-loop-item post-476 station type-station status-publish has-post-thumbnail hentry genre-pop station_tag-youtube entry">
-                    <figure class="post-thumbnail">
-                        <a class="post-thumbnail-inner" href="{{ url('/programme/programme-title') }}" aria-hidden="true" tabindex="-1">
-                            <img width="1000" height="1250" src="{{ asset('images/programmes/john.jpeg') }}" class="attachment-post-thumbnail size-post-thumbnail" alt="" sizes="(max-width: 1000px) 100vw, 1000px" />
-                        </a>
-                    </figure>
-
-                    <header class="entry-header">
-                        <h3 class="entry-title">
-                            <a href="{{ url('/programme/programme-title') }}" rel="bookmark">Bovi Home Coming</a>
-                        </h3>
-                    </header>
-                </article>
-            </div>
-            <!-- FEATURED ITEM ENDS HERE -->
-
-
-            <!-- FEATURED ITEM STARTS HERE -->
-            <div class=" col-6 col-sm-4 col-md-3 col-lg-2-4 col-xl-2">
-                <article class="block-loop-item post-476 station type-station status-publish has-post-thumbnail hentry genre-pop station_tag-youtube entry">
-                    <figure class="post-thumbnail">
-                        <a class="post-thumbnail-inner" href="{{ url('/programme/programme-title') }}" aria-hidden="true" tabindex="-1">
-                            <img width="1000" height="1250" src="{{ asset('images/programmes/michael.jpeg') }}" class="attachment-post-thumbnail size-post-thumbnail" alt="" sizes="(max-width: 1000px) 100vw, 1000px" />
-                        </a>
-                    </figure>
-
-                    <header class="entry-header">
-                        <h3 class="entry-title">
-                            <a href="{{ url('/programme/programme-title') }}" rel="bookmark">Animal Kingdom</a>
-                        </h3>
-                    </header>
-                </article>
-            </div>
-            <!-- FEATURED ITEM ENDS HERE -->
-
-
-            <!-- FEATURED ITEM STARTS HERE -->
-            <div class=" col-6 col-sm-4 col-md-3 col-lg-2-4 col-xl-2">
-                <article class="block-loop-item post-476 station type-station status-publish has-post-thumbnail hentry genre-pop station_tag-youtube entry">
-                    <figure class="post-thumbnail">
-                        <a class="post-thumbnail-inner" href="{{ url('/programme/programme-title') }}" aria-hidden="true" tabindex="-1">
-                            <img width="1000" height="1250" src="{{ asset('images/programmes/harding.jpeg') }}" class="attachment-post-thumbnail size-post-thumbnail" alt="" sizes="(max-width: 1000px) 100vw, 1000px" />
-                        </a>
-                    </figure>
-
-                    <header class="entry-header">
-                        <h3 class="entry-title">
-                            <a href="{{ url('/programme/programme-title') }}" rel="bookmark">Welcome Home</a>
-                        </h3>
-                    </header>
-                </article>
-            </div>
-            <!-- FEATURED ITEM ENDS HERE -->
+            <!-- Programmes -->
 
         </div>
     </div>

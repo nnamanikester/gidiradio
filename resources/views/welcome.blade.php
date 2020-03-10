@@ -173,116 +173,34 @@
 
 
 
-    <h3><a href="browse/radio/index.html">Meet Our OAPs</a></h3>
+    <h3><a href="#">Meet Our OAPs</a></h3>
 
     <!-- OAPs STARTS HERE -->
     <div class="entry-content sub-content">
         <div class="wp-block-loop wp-block-loop-user">
-            <div class="row" data-plugin="slick" data-option="{ slidesToShow: 6, slidesToScroll: 1, infinite: false, responsive: [ { breakpoint: 920, settings: { slidesToShow: 4 } }, { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 576, settings: { slidesToShow: 2 } } ] }">
+            <div class="row" data-plugin="slick" data-option="{ slidesToShow: 5, slidesToScroll: 1, infinite: true, responsive: [ { breakpoint: 920, settings: { slidesToShow: 4 } }, { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 576, settings: { slidesToShow: 2 } } ] }">
 
                 <!-- OAP ITEM STARTS HERE -->
+                @foreach ($oaps as $item)
                 <div class=" col-6 col-sm-4 col-md-3 col-lg-2-4 col-xl-2">
                     <article id="user-1" class="block-loop-item">
                         <figure class="post-thumbnail">
                             <a class="post-thumbnail-inner" href="admin/index.html">
-                                <img alt="Hello"
-                                    src="wp-content/uploads/2019/06/Hello_avatar.jpg" />
+                                <img alt="Oap"
+                            src="{{ asset('images/oaps/' . $item->image) }}" />
                             </a>
                         </figure>
 
                         <header class="entry-header">
-                            <h3 class="entry-title"><a href="admin/index.html"
-                                    rel="bookmark">Kester John</a></h3>
+                            <h3 class="entry-title"><a href="{{ url('/profile/'.$item->slug) }}"
+                                    rel="bookmark">{{ $item->name }}</a></h3>
                             <button class="btn-follow">
-                                <span class="follow">OAP1</span>
+                                <span class="follow">{{ $item->title }}</span>
                             </button>
                         </header>
                     </article>
                 </div>
-                <!-- OAP ITEM ENDS HERE -->
-
-                <!-- OAP ITEM STARTS HERE -->
-                <div class=" col-6 col-sm-4 col-md-3 col-lg-2-4 col-xl-2">
-                    <article id="user-1" class="block-loop-item">
-                        <figure class="post-thumbnail">
-                            <a class="post-thumbnail-inner" href="admin/index.html">
-                                <img alt="Hello"
-                                    src="wp-content/uploads/2019/06/Hello_avatar.jpg" />
-                            </a>
-                        </figure>
-
-                        <header class="entry-header">
-                            <h3 class="entry-title"><a href="admin/index.html"
-                                    rel="bookmark">Kester John</a></h3>
-                            <button class="btn-follow">
-                                <span class="follow">OAP1</span>
-                            </button>
-                        </header>
-                    </article>
-                </div>
-                <!-- OAP ITEM ENDS HERE -->
-
-                <!-- OAP ITEM STARTS HERE -->
-                <div class=" col-6 col-sm-4 col-md-3 col-lg-2-4 col-xl-2">
-                    <article id="user-1" class="block-loop-item">
-                        <figure class="post-thumbnail">
-                            <a class="post-thumbnail-inner" href="admin/index.html">
-                                <img alt="Hello"
-                                    src="wp-content/uploads/2019/06/Hello_avatar.jpg" />
-                            </a>
-                        </figure>
-
-                        <header class="entry-header">
-                            <h3 class="entry-title"><a href="admin/index.html"
-                                    rel="bookmark">Kester John</a></h3>
-                            <button class="btn-follow">
-                                <span class="follow">OAP1</span>
-                            </button>
-                        </header>
-                    </article>
-                </div>
-                <!-- OAP ITEM ENDS HERE -->
-
-                <!-- OAP ITEM STARTS HERE -->
-                <div class=" col-6 col-sm-4 col-md-3 col-lg-2-4 col-xl-2">
-                    <article id="user-256" class="block-loop-item">
-                        <figure class="post-thumbnail">
-                            <a class="post-thumbnail-inner" href="boom/index.html">
-                                <img alt="boom"
-                                    src="wp-content/uploads/2020/01/boom_avatar.jpg" />
-                            </a>
-                        </figure>
-
-                        <header class="entry-header">
-                            <h3 class="entry-title"><a href="boom/index.html"
-                                    rel="bookmark">Victor</a></h3>
-                            <button class="btn-follow">
-                                <span class="follow">OAP2</span>
-                            </button>
-                        </header>
-                    </article>
-                </div>
-                <!-- OAP ITEM ENDS HERE -->
-
-                <!-- OAP ITEM STARTS HERE -->
-                <div class=" col-6 col-sm-4 col-md-3 col-lg-2-4 col-xl-2">
-                    <article id="user-256" class="block-loop-item">
-                        <figure class="post-thumbnail">
-                            <a class="post-thumbnail-inner" href="boom/index.html">
-                                <img alt="boom"
-                                    src="wp-content/uploads/2020/01/boom_avatar.jpg" />
-                            </a>
-                        </figure>
-
-                        <header class="entry-header">
-                            <h3 class="entry-title"><a href="boom/index.html"
-                                    rel="bookmark">Victor</a></h3>
-                            <button class="btn-follow">
-                                <span class="follow">OAP2</span>
-                            </button>
-                        </header>
-                    </article>
-                </div>
+                @endforeach
                 <!-- OAP ITEM ENDS HERE -->
 
             </div>
@@ -291,123 +209,30 @@
     <!-- OAP ENDS HERE -->
 
     <!-- AS IT DROPS STARTS HERE -->
-    <h3>As It Drops</h3>
+    <h3>Latest Trends</h3>
 
     <div class="wp-block-loop wp-block-loop-station  align" >
-        <div class="row" data-plugin="slick" data-option="{ slidesToShow: 4, slidesToScroll: 1, infinite: false, responsive: [ { breakpoint: 920, settings: { slidesToShow: 4 } }, { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 576, settings: { slidesToShow: 2 } } ] }">
+        <div class="row" data-plugin="slick" data-option="{ slidesToShow: 6, slidesToScroll: 1, infinite: false, responsive: [ { breakpoint: 920, settings: { slidesToShow: 4 } }, { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 576, settings: { slidesToShow: 2 } } ] }">
 
-            <!-- AS IT DROPS ITEM STARTS HERE -->
+            <!-- BLOGS -->
+            @foreach ($blogs as $item)
             <div class=" col-6 col-sm-4 col-md-3 col-lg-2-4 col-xl-2">
                 <article class="block-loop-item post-476 station type-station status-publish has-post-thumbnail hentry genre-pop station_tag-youtube entry">
                     <figure class="post-thumbnail">
-                        <a class="post-thumbnail-inner" href="station/girls-like-you-ft-cardi-b-youtube/index.html" aria-hidden="true" tabindex="-1">
-                            <img width="1000" height="1250" src="wp-content/uploads/2019/06/pexels-photo-1030895.jpg" class="attachment-post-thumbnail size-post-thumbnail" alt="" sizes="(max-width: 1000px) 100vw, 1000px" />
+                        <a class="post-thumbnail-inner" href="{{ '/blog/' . $item->slug }}" aria-hidden="true" tabindex="-1">
+                            <img width="1000" height="1250" src="{{ asset('images/blogs/' . $item->image) }}" class="attachment-post-thumbnail size-post-thumbnail" alt="" sizes="(max-width: 1000px) 100vw, 1000px" />
                         </a>
                     </figure>
 
                     <header class="entry-header">
                         <h3 class="entry-title">
-                            <a href="station/girls-like-you-ft-cardi-b-youtube/index.html" rel="bookmark">Girls like you MTV</a>
+                        <a href="{{ '/blog/' . $item->slug }}" rel="bookmark">{{ $item->title }}</a>
                         </h3>
                     </header>
                 </article>
             </div>
-            <!-- FEATURED ITEM ENDS HERE -->
-
-
-            <!-- FEATURED ITEM STARTS HERE -->
-            <div class=" col-6 col-sm-4 col-md-3 col-lg-2-4 col-xl-2">
-                <article class="block-loop-item post-476 station type-station status-publish has-post-thumbnail hentry genre-pop station_tag-youtube entry">
-                    <figure class="post-thumbnail">
-                        <a class="post-thumbnail-inner" href="station/girls-like-you-ft-cardi-b-youtube/index.html" aria-hidden="true" tabindex="-1">
-                            <img width="1000" height="1250" src="wp-content/uploads/2019/06/pexels-photo-1030895.jpg" class="attachment-post-thumbnail size-post-thumbnail" alt="" sizes="(max-width: 1000px) 100vw, 1000px" />
-                        </a>
-                    </figure>
-
-                    <header class="entry-header">
-                        <h3 class="entry-title">
-                            <a href="station/girls-like-you-ft-cardi-b-youtube/index.html" rel="bookmark">Girls like you MTV</a>
-                        </h3>
-                    </header>
-                </article>
-            </div>
-            <!-- FEATURED ITEM ENDS HERE -->
-
-
-            <!-- FEATURED ITEM STARTS HERE -->
-            <div class=" col-6 col-sm-4 col-md-3 col-lg-2-4 col-xl-2">
-                <article class="block-loop-item post-476 station type-station status-publish has-post-thumbnail hentry genre-pop station_tag-youtube entry">
-                    <figure class="post-thumbnail">
-                        <a class="post-thumbnail-inner" href="station/girls-like-you-ft-cardi-b-youtube/index.html" aria-hidden="true" tabindex="-1">
-                            <img width="1000" height="1250" src="wp-content/uploads/2019/06/pexels-photo-1030895.jpg" class="attachment-post-thumbnail size-post-thumbnail" alt="" sizes="(max-width: 1000px) 100vw, 1000px" />
-                        </a>
-                    </figure>
-
-                    <header class="entry-header">
-                        <h3 class="entry-title">
-                            <a href="station/girls-like-you-ft-cardi-b-youtube/index.html" rel="bookmark">Girls like you MTV</a>
-                        </h3>
-                    </header>
-                </article>
-            </div>
-            <!-- FEATURED ITEM ENDS HERE -->
-
-
-            <!-- FEATURED ITEM STARTS HERE -->
-            <div class=" col-6 col-sm-4 col-md-3 col-lg-2-4 col-xl-2">
-                <article class="block-loop-item post-476 station type-station status-publish has-post-thumbnail hentry genre-pop station_tag-youtube entry">
-                    <figure class="post-thumbnail">
-                        <a class="post-thumbnail-inner" href="station/girls-like-you-ft-cardi-b-youtube/index.html" aria-hidden="true" tabindex="-1">
-                            <img width="1000" height="1250" src="wp-content/uploads/2019/06/pexels-photo-1030895.jpg" class="attachment-post-thumbnail size-post-thumbnail" alt="" sizes="(max-width: 1000px) 100vw, 1000px" />
-                        </a>
-                    </figure>
-
-                    <header class="entry-header">
-                        <h3 class="entry-title">
-                            <a href="station/girls-like-you-ft-cardi-b-youtube/index.html" rel="bookmark">Girls like you MTV</a>
-                        </h3>
-                    </header>
-                </article>
-            </div>
-            <!-- FEATURED ITEM ENDS HERE -->
-
-
-            <!-- FEATURED ITEM STARTS HERE -->
-            <div class=" col-6 col-sm-4 col-md-3 col-lg-2-4 col-xl-2">
-                <article class="block-loop-item post-476 station type-station status-publish has-post-thumbnail hentry genre-pop station_tag-youtube entry">
-                    <figure class="post-thumbnail">
-                        <a class="post-thumbnail-inner" href="station/girls-like-you-ft-cardi-b-youtube/index.html" aria-hidden="true" tabindex="-1">
-                            <img width="1000" height="1250" src="wp-content/uploads/2019/06/pexels-photo-1030895.jpg" class="attachment-post-thumbnail size-post-thumbnail" alt="" sizes="(max-width: 1000px) 100vw, 1000px" />
-                        </a>
-                    </figure>
-
-                    <header class="entry-header">
-                        <h3 class="entry-title">
-                            <a href="station/girls-like-you-ft-cardi-b-youtube/index.html" rel="bookmark">Girls like you MTV</a>
-                        </h3>
-                    </header>
-                </article>
-            </div>
-            <!-- FEATURED ITEM ENDS HERE -->
-
-
-            <!-- FEATURED ITEM STARTS HERE -->
-            <div class=" col-6 col-sm-4 col-md-3 col-lg-2-4 col-xl-2">
-                <article class="block-loop-item post-476 station type-station status-publish has-post-thumbnail hentry genre-pop station_tag-youtube entry">
-                    <figure class="post-thumbnail">
-                        <a class="post-thumbnail-inner" href="station/girls-like-you-ft-cardi-b-youtube/index.html" aria-hidden="true" tabindex="-1">
-                            <img width="1000" height="1250" src="wp-content/uploads/2019/06/pexels-photo-1030895.jpg" class="attachment-post-thumbnail size-post-thumbnail" alt="" sizes="(max-width: 1000px) 100vw, 1000px" />
-                        </a>
-                    </figure>
-
-                    <header class="entry-header">
-                        <h3 class="entry-title">
-                            <a href="station/girls-like-you-ft-cardi-b-youtube/index.html" rel="bookmark">Girls like you MTV</a>
-                        </h3>
-                    </header>
-                </article>
-            </div>
-            <!-- AS IT DROPS ITEM ENDS -->
+            @endforeach
+            <!-- BLOGS -->
 
         </div>
     </div>
@@ -510,13 +335,13 @@
 
 
 
-<div class="wp-block-cover alignfull has-background-dim-60 has-background-dim has-parallax" style="background-image:url(wp-content/uploads/2019/06/b2.jpg)">
+<div class="wp-block-cover alignfull has-background-dim-60 has-background-dim has-parallax" style="background-image:url({{ asset('images/site-info/' . $settings->signboard_image) }})">
 <div class="wp-block-cover__inner-container">
     <p style="text-align:center" class="has-large-font-size w-50">
-        <strong>Get Your Music On Our Playlist Today!</strong>
+        <strong>{{ $settings->signboard_title }}</strong>
     </p>
     <div class="wp-block-button aligncenter">
-        <a class="wp-block-button__link has-text-color has-background has-very-light-gray-background-color" href="" style="color:#0a9763">Let's Get Started</a>
+        <a class="wp-block-button__link has-text-color has-background has-very-light-gray-background-color" href="{{ $settings->signboard_button_link }}" style="color:#0a9763">{{ $settings->signboard_button_text }}</a>
     </div>
 </div>
 </div>

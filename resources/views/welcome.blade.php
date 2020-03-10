@@ -105,23 +105,26 @@
 
     <div class="wp-block-loop wp-block-loop-station  align" >
         <div class="row" data-plugin="slick" data-option="{ slidesToShow: 6, slidesToScroll: 1, infinite: false, responsive: [ { breakpoint: 920, settings: { slidesToShow: 4 } }, { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 576, settings: { slidesToShow: 2 } } ] }">
-
             <!-- Programmes -->
+            @foreach ($programmes as $item)
+
             <div class=" col-6 col-sm-4 col-md-3 col-lg-2-4 col-xl-2">
                 <article class="block-loop-item post-476 station type-station status-publish has-post-thumbnail hentry genre-pop station_tag-youtube entry">
                     <figure class="post-thumbnail">
-                        <a class="post-thumbnail-inner" href="{{ url('/programme/programme-title') }}" aria-hidden="true" tabindex="-1">
-                            <img width="1000" height="1250" src="{{ asset('images/programmes/harding.jpeg') }}" class="attachment-post-thumbnail size-post-thumbnail" alt="" sizes="(max-width: 1000px) 100vw, 1000px" />
+                        <a class="post-thumbnail-inner" href="{{ url('/programme/'.$item->slug) }}" aria-hidden="true" tabindex="-1">
+                            <img width="1000" height="1250" src="{{ asset('images/programmes/'.$item->image) }}" class="attachment-post-thumbnail size-post-thumbnail" alt="" sizes="(max-width: 1000px) 100vw, 1000px" />
                         </a>
                     </figure>
 
                     <header class="entry-header">
                         <h3 class="entry-title">
-                            <a href="{{ url('/programme/programme-title') }}" rel="bookmark">Girls like you MTV</a>
+                            <a href="{{ url('/programme/'.$item->slug) }}" rel="bookmark">{{ $item->title }}</a>
                         </h3>
                     </header>
                 </article>
             </div>
+
+            @endforeach
             <!-- Programmes -->
 
         </div>
@@ -131,16 +134,17 @@
 
     <h3><a href="#">As It Drops</a></h3>
 
-    <!-- ONLINE RADIO STARTS HERE -->
+    <!-- AS IT DROPS -->
     <div class="wp-block-loop wp-block-loop-station block-loop-hover align" >
         <div class="row" data-plugin="slick" data-option="{ slidesToShow: 6, slidesToScroll: 1, infinite: false, responsive: [ { breakpoint: 920, settings: { slidesToShow: 4 } }, { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 576, settings: { slidesToShow: 2 } } ] }" >
 
-            <!-- ONLINE RADIO ITEM STARTS HERE -->
+            <!-- As It Drops -->
+            @foreach ($asitdrops as $item)
             <div class=" col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2">
                 <article data-id="post-223" data-play-id="223" class="block-loop-item post-223 station type-station status-publish has-post-thumbnail hentry genre-radio entry">
                     <figure class="post-thumbnail">
                         <a class="post-thumbnail-inner" href="station/the-blues-cove/index.html" aria-hidden="true" tabindex="-1">
-                            <img width="1568" height="1045" src="wp-content/uploads/2019/06/b19-1568x1045.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" sizes="(max-width: 1568px) 100vw, 1568px" />
+                        <img width="1568" height="1045" src="{{ asset('images/audio/'.$item->image) }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" sizes="(max-width: 1568px) 100vw, 1568px" />
                         </a>
                         <div class="entry-action">
                             <span class="btn-like "></span>
@@ -151,20 +155,21 @@
 
                     <header class="entry-header">
                         <h3 class="entry-title">
-                            <a href="station/the-blues-cove/index.html" rel="bookmark">The Blues Cove</a>
+                            <a href="#" rel="bookmark">{{ $item->title }}</a>
                         </h3>
                         <div class="entry-meta">
-                            <span class="byline"><span class="author vcard"><a class="url fn n" href="user/daria/index.html">Daria Shevtsova</a></span></span>
+                            <span class="byline"><span class="author vcard"><a class="url fn n" href="#">{{ $item->artist }}</a></span></span>
                         </div>
                     </header>
 
                 </article>
             </div>
-            <!-- ONLINE RADIO ITEM ENDS HERE -->
+            @endforeach
+            {{-- AS IT DROPS --}}
 
         </div>
     </div>
-    <!-- ONLINE RADIO ENDS -->
+    {{-- AS IT DROPS --}}
 
 
 

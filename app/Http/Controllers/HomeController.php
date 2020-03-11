@@ -10,6 +10,7 @@ use App\Episode;
 use App\Asitdrop;
 use App\Oap;
 use App\HeaderImage;
+use App\Advert;
 use App\SiteSetting;
 
 class HomeController extends Controller
@@ -36,10 +37,11 @@ class HomeController extends Controller
       $episodes = Episode::orderBy('updated_at', 'DESC')->limit(20)->get();
       $asitdrops = Asitdrop::orderBy('created_at', 'DESC')->limit(20)->get();
       $blogs = Blog::orderBy('updated_at', 'DESC')->limit(20)->get();
-      $oaps = Oap::limit(20)->get();
+      $oaps = Oap::where('active', 1)->limit(20)->get();
+      $ads = Advert::limit(2)->get();
       $settings = SiteSetting::find(1);
 
-      return view('welcome', compact('header_images', 'oaps', 'programmes', 'settings', 'episodes', 'asitdrops', 'blogs'));
+      return view('welcome', compact('header_images', 'ads', 'oaps', 'programmes', 'settings', 'episodes', 'asitdrops', 'blogs'));
     }
     // public function login()
     // {

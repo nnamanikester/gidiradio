@@ -311,21 +311,16 @@
 
     <div class="wp-block-column">
 
+        @foreach ($ads as $item)
         <div class="wp-block-columns">
-            <div class="wp-block-cover has-pale-cyan-blue-background-color has-background-dim h-auto rounded" style="background-image:url(wp-content/uploads/2019/06/holder.png)">
+            <div class="wp-block-cover has-pale-cyan-blue-background-color has-background-dim h-auto rounded">
                 <div class="wp-block-cover__inner-container">
-                    <p style="text-align:center" class="has-medium-font-size">MTN EVERYWHERE YOU GO</p>
+                    {{-- <p style="text-align:center" class="has-medium-font-size">MTN EVERYWHERE YOU GO</p> --}}
+                    {!! $item->content !!}
                 </div>
             </div>
         </div>
-
-        <div class="wp-block-columns">
-            <div class="wp-block-cover has-background-dim h-auto gd-primary rounded" style="background-image:url(wp-content/uploads/2019/06/holder.png)">
-                <div class="wp-block-cover__inner-container">
-                    <p style="color:#ffffff;text-align:center" class="has-text-color has-medium-font-size">INDOMIE INSTANT NOODLES</p>
-                </div>
-            </div>
-        </div>
+        @endforeach
 
     </div>
     <div class="wp-block-loop wp-block-loop-post post-thumbnail-16x9 align" ></div>

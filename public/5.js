@@ -37,7 +37,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Advert'
+  name: 'Advert',
+  data: function data() {
+    return {
+      adverts: []
+    };
+  },
+  methods: {
+    getAdvert: function getAdvert() {
+      axios.get('/api/adverts').then(function (res) {
+        console.log(res.data);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  }
 });
 
 /***/ }),

@@ -27,6 +27,22 @@
 
 <script>
 export default {
-    name: 'Advert'
+    name: 'Advert',
+    data () {
+        return {
+            adverts: []
+        }
+    },
+    methods: {
+        getAdvert () {
+            axios.get('/api/adverts')
+                .then(res => {
+                    console.log(res.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+    }
 }
 </script>

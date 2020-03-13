@@ -2,21 +2,11 @@
     <div class="wp-block-column">
         <h3>Advertisment</h3>
 
-        <div class="wp-block-column">
+        <div class="wp-block-column" v-if="adverts">
 
-            <div class="wp-block-columns">
+            <div class="wp-block-columns" v-for="ad in adverts" :key="ad.id">
                 <div class="wp-block-cover has-pale-cyan-blue-background-color has-background-dim h-auto rounded" style="background-image:url(wp-content/uploads/2019/06/holder.png)">
-                    <div class="wp-block-cover__inner-container">
-                        <p style="text-align:center" class="has-medium-font-size">MTN EVERYWHERE YOU GO</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="wp-block-columns">
-                <div class="wp-block-cover has-background-dim h-auto gd-primary rounded" style="background-image:url(wp-content/uploads/2019/06/holder.png)">
-                    <div class="wp-block-cover__inner-container">
-                        <p style="color:#ffffff;text-align:center" class="has-text-color has-medium-font-size">INDOMIE INSTANT NOODLES</p>
-                    </div>
+                    <div class="wp-block-cover__inner-container" v-html="ad.content"></div>
                 </div>
             </div>
 
@@ -26,6 +16,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name: 'Advert',
     data () {
@@ -37,12 +29,22 @@ export default {
         getAdvert () {
             axios.get('/api/adverts')
                 .then(res => {
-                    console.log(res.data)
+                  res.data.forEach(item => {
+                    this.adverts.push(item)
+                  })
                 })
                 .catch(err => {
-                    console.log(err)
+                    const error = err
                 })
+        },
+        decodeHtml (data) {
+            var txt = document.createElement('div')
+            txt.innerHTML = data
+            return txt.value
         }
+    },
+    mounted () {
+      this.getAdvert()
     }
 }
 </script>

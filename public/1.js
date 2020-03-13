@@ -9,6 +9,8 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -26,16 +28,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Advert',
   data: function data() {
@@ -45,12 +38,24 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getAdvert: function getAdvert() {
-      axios.get('/api/adverts').then(function (res) {
-        console.log(res.data);
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/adverts').then(function (res) {
+        res.data.forEach(function (item) {
+          _this.adverts.push(item);
+        });
       })["catch"](function (err) {
-        console.log(err);
+        var error = err;
       });
+    },
+    decodeHtml: function decodeHtml(data) {
+      var txt = document.createElement('div');
+      txt.innerHTML = data;
+      return txt.value;
     }
+  },
+  mounted: function mounted() {
+    this.getAdvert();
   }
 });
 
@@ -248,7 +253,14 @@ __webpack_require__.r(__webpack_exports__);
       oapSrc: '/images/oaps/',
       moment: moment__WEBPACK_IMPORTED_MODULE_2___default.a,
       pageLoading: true,
-      networkError: false
+      networkError: false,
+      comment: {
+        name: null,
+        email: null,
+        body: null,
+        website: null
+      },
+      feedback: null
     };
   },
   methods: {
@@ -270,6 +282,32 @@ __webpack_require__.r(__webpack_exports__);
         _this.pageLoading = false;
         _this.networkError = true;
       });
+    },
+    postComment: function postComment() {
+      var _this2 = this;
+
+      if (!this.comment.body) return this.feedback = 'Comment is required!';
+      if (!this.comment.name) return this.feedback = 'Name is required!';
+      if (!this.comment.email) return this.feedback = 'Email is required!';
+
+      if (this.comment.body && this.comment.name && this.comment.email) {
+        var data = new FormData();
+        data.append('name', this.comment.name);
+        data.append('email', this.comment.email);
+        data.append('body', this.comment.body);
+        data.append('website', this.comment.website);
+        data.append('episode_id', this.episode.id);
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/episode/comment", data).then(function (res) {
+          _this2.episode.comments.unshift(res.data);
+
+          _this2.comment.name = null;
+          _this2.comment.email = null;
+          _this2.comment.body = null;
+          _this2.comment.website = null;
+        })["catch"](function (err) {
+          var error = err;
+        });
+      }
     }
   },
   mounted: function mounted() {
@@ -348,75 +386,44 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "wp-block-column" }, [
+    _c("h3", [_vm._v("Advertisment")]),
+    _vm._v(" "),
+    _vm.adverts
+      ? _c(
+          "div",
+          { staticClass: "wp-block-column" },
+          _vm._l(_vm.adverts, function(ad) {
+            return _c("div", { key: ad.id, staticClass: "wp-block-columns" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "wp-block-cover has-pale-cyan-blue-background-color has-background-dim h-auto rounded",
+                  staticStyle: {
+                    "background-image":
+                      "url(wp-content/uploads/2019/06/holder.png)"
+                  }
+                },
+                [
+                  _c("div", {
+                    staticClass: "wp-block-cover__inner-container",
+                    domProps: { innerHTML: _vm._s(ad.content) }
+                  })
+                ]
+              )
+            ])
+          }),
+          0
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", {
+      staticClass: "wp-block-loop wp-block-loop-post post-thumbnail-16x9 align"
+    })
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "wp-block-column" }, [
-      _c("h3", [_vm._v("Advertisment")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "wp-block-column" }, [
-        _c("div", { staticClass: "wp-block-columns" }, [
-          _c(
-            "div",
-            {
-              staticClass:
-                "wp-block-cover has-pale-cyan-blue-background-color has-background-dim h-auto rounded",
-              staticStyle: {
-                "background-image": "url(wp-content/uploads/2019/06/holder.png)"
-              }
-            },
-            [
-              _c("div", { staticClass: "wp-block-cover__inner-container" }, [
-                _c(
-                  "p",
-                  {
-                    staticClass: "has-medium-font-size",
-                    staticStyle: { "text-align": "center" }
-                  },
-                  [_vm._v("MTN EVERYWHERE YOU GO")]
-                )
-              ])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "wp-block-columns" }, [
-          _c(
-            "div",
-            {
-              staticClass:
-                "wp-block-cover has-background-dim h-auto gd-primary rounded",
-              staticStyle: {
-                "background-image": "url(wp-content/uploads/2019/06/holder.png)"
-              }
-            },
-            [
-              _c("div", { staticClass: "wp-block-cover__inner-container" }, [
-                _c(
-                  "p",
-                  {
-                    staticClass: "has-text-color has-medium-font-size",
-                    staticStyle: { color: "#ffffff", "text-align": "center" }
-                  },
-                  [_vm._v("INDOMIE INSTANT NOODLES")]
-                )
-              ])
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", {
-        staticClass:
-          "wp-block-loop wp-block-loop-post post-thumbnail-16x9 align"
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -733,7 +740,189 @@ var render = function() {
                       )
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm._m(1)
+                  _c(
+                    "div",
+                    {
+                      staticClass: "comment-respond",
+                      attrs: { id: "respond" }
+                    },
+                    [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c(
+                        "form",
+                        {
+                          staticClass: "comment-form",
+                          attrs: { action: "", method: "post" },
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                            }
+                          }
+                        },
+                        [
+                          _vm.feedback
+                            ? _c("div", { staticClass: "text-dange" }, [
+                                _vm._v(_vm._s(_vm.feedback))
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm._m(2),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "comment-form-comment" }, [
+                            _c("label", { attrs: { for: "comment" } }, [
+                              _vm._v("Comment")
+                            ]),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.comment.body,
+                                  expression: "comment.body"
+                                }
+                              ],
+                              attrs: {
+                                name: "comment",
+                                cols: "45",
+                                rows: "8",
+                                maxlength: "65525",
+                                required: "required"
+                              },
+                              domProps: { value: _vm.comment.body },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.comment,
+                                    "body",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(3),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.comment.name,
+                                expression: "comment.name"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              size: "30",
+                              maxlength: "245",
+                              required: "required"
+                            },
+                            domProps: { value: _vm.comment.name },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.comment,
+                                  "name",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm._m(4),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.comment.email,
+                                expression: "comment.email"
+                              }
+                            ],
+                            attrs: {
+                              type: "email",
+                              size: "30",
+                              maxlength: "100",
+                              "aria-describedby": "email-notes",
+                              required: "required"
+                            },
+                            domProps: { value: _vm.comment.email },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.comment,
+                                  "email",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { attrs: { for: "url" } }, [
+                            _vm._v("Website")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.comment.website,
+                                expression: "comment.website"
+                              }
+                            ],
+                            attrs: {
+                              type: "url",
+                              value: "",
+                              size: "30",
+                              maxlength: "200"
+                            },
+                            domProps: { value: _vm.comment.website },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.comment,
+                                  "website",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "form-submit" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "submit",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.postComment()
+                                  }
+                                }
+                              },
+                              [_vm._v("Post Comment ")]
+                            )
+                          ])
+                        ]
+                      )
+                    ]
+                  )
                 ])
               ]),
               _vm._v(" "),
@@ -766,7 +955,7 @@ var render = function() {
         ]
       )
     : _vm.networkError
-    ? _c("div", { staticClass: "justify-content-center loader" }, [_vm._m(2)])
+    ? _c("div", { staticClass: "justify-content-center loader" }, [_vm._m(5)])
     : _c("Error404")
 }
 var staticRenderFns = [
@@ -784,119 +973,44 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "comment-respond", attrs: { id: "respond" } },
-      [
-        _c("h2", { staticClass: "comment-reply-title" }, [
-          _vm._v("Leave a Reply "),
-          _c("small", [
-            _c("a", { attrs: { rel: "nofollow", href: "#" } }, [
-              _vm._v("Cancel reply")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            staticClass: "comment-form",
-            attrs: { action: "", method: "post" }
-          },
-          [
-            _c("p", { staticClass: "comment-notes" }, [
-              _c("span", { attrs: { id: "email-notes" } }, [
-                _vm._v("Your email address will not be published.")
-              ]),
-              _vm._v("Required fields are marked "),
-              _c("span", { staticClass: "required" }, [_vm._v("*")])
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "comment-form-comment" }, [
-              _c("label", { attrs: { for: "comment" } }, [_vm._v("Comment")]),
-              _vm._v(" "),
-              _c("textarea", {
-                attrs: {
-                  id: "comment",
-                  name: "comment",
-                  cols: "45",
-                  rows: "8",
-                  maxlength: "65525",
-                  required: "required"
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("label", { attrs: { for: "author" } }, [
-              _vm._v("Name "),
-              _c("span", { staticClass: "required" }, [_vm._v("*")])
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              attrs: {
-                name: "author",
-                type: "text",
-                size: "30",
-                maxlength: "245",
-                required: "required"
-              }
-            }),
-            _vm._v(" "),
-            _c("label", { attrs: { for: "email" } }, [
-              _vm._v("Email "),
-              _c("span", { staticClass: "required" }, [_vm._v("*")])
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              attrs: {
-                name: "email",
-                type: "email",
-                value: "",
-                size: "30",
-                maxlength: "100",
-                "aria-describedby": "email-notes",
-                required: "required"
-              }
-            }),
-            _vm._v(" "),
-            _c("label", { attrs: { for: "url" } }, [_vm._v("Website")]),
-            _vm._v(" "),
-            _c("input", {
-              attrs: {
-                name: "url",
-                type: "url",
-                value: "",
-                size: "30",
-                maxlength: "200"
-              }
-            }),
-            _vm._v(" "),
-            _c("p", { staticClass: "comment-form-cookies-consent" }, [
-              _c("input", {
-                attrs: {
-                  name: "cookies-consent",
-                  type: "checkbox",
-                  value: "yes"
-                }
-              }),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "cookies-consent" } }, [
-                _vm._v(
-                  "Save my name, email, and website in this browser for the next time I comment."
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "form-submit" }, [
-              _c("input", {
-                staticClass: "submit",
-                attrs: { name: "submit", type: "submit", value: "Post Comment" }
-              })
-            ])
-          ]
-        )
-      ]
-    )
+    return _c("h2", { staticClass: "comment-reply-title" }, [
+      _vm._v("Leave a Reply "),
+      _c("small", [
+        _c("a", { attrs: { rel: "nofollow", href: "#" } }, [
+          _vm._v("Cancel reply")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "comment-notes" }, [
+      _c("span", { attrs: { id: "email-notes" } }, [
+        _vm._v("Your email address will not be published.")
+      ]),
+      _vm._v("Required fields are marked "),
+      _c("span", { staticClass: "required" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "author" } }, [
+      _vm._v("Name "),
+      _c("span", { staticClass: "required" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "email" } }, [
+      _vm._v("Email "),
+      _c("span", { staticClass: "required" }, [_vm._v("*")])
+    ])
   },
   function() {
     var _vm = this

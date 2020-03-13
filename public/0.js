@@ -9,6 +9,8 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -26,16 +28,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Advert',
   data: function data() {
@@ -45,12 +38,24 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getAdvert: function getAdvert() {
-      axios.get('/api/adverts').then(function (res) {
-        console.log(res.data);
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/adverts').then(function (res) {
+        res.data.forEach(function (item) {
+          _this.adverts.push(item);
+        });
       })["catch"](function (err) {
-        console.log(err);
+        var error = err;
       });
+    },
+    decodeHtml: function decodeHtml(data) {
+      var txt = document.createElement('div');
+      txt.innerHTML = data;
+      return txt.value;
     }
+  },
+  mounted: function mounted() {
+    this.getAdvert();
   }
 });
 
@@ -296,7 +301,10 @@ __webpack_require__.r(__webpack_exports__);
         axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/blog/comment", data).then(function (res) {
           _this2.blog.comments.unshift(res.data);
 
-          console.log(res.data);
+          _this2.comment.name = null;
+          _this2.comment.email = null;
+          _this2.comment.body = null;
+          _this2.comment.website = null;
         })["catch"](function (err) {
           var error = err;
           console.log(err);
@@ -393,75 +401,44 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "wp-block-column" }, [
+    _c("h3", [_vm._v("Advertisment")]),
+    _vm._v(" "),
+    _vm.adverts
+      ? _c(
+          "div",
+          { staticClass: "wp-block-column" },
+          _vm._l(_vm.adverts, function(ad) {
+            return _c("div", { key: ad.id, staticClass: "wp-block-columns" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "wp-block-cover has-pale-cyan-blue-background-color has-background-dim h-auto rounded",
+                  staticStyle: {
+                    "background-image":
+                      "url(wp-content/uploads/2019/06/holder.png)"
+                  }
+                },
+                [
+                  _c("div", {
+                    staticClass: "wp-block-cover__inner-container",
+                    domProps: { innerHTML: _vm._s(ad.content) }
+                  })
+                ]
+              )
+            ])
+          }),
+          0
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", {
+      staticClass: "wp-block-loop wp-block-loop-post post-thumbnail-16x9 align"
+    })
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "wp-block-column" }, [
-      _c("h3", [_vm._v("Advertisment")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "wp-block-column" }, [
-        _c("div", { staticClass: "wp-block-columns" }, [
-          _c(
-            "div",
-            {
-              staticClass:
-                "wp-block-cover has-pale-cyan-blue-background-color has-background-dim h-auto rounded",
-              staticStyle: {
-                "background-image": "url(wp-content/uploads/2019/06/holder.png)"
-              }
-            },
-            [
-              _c("div", { staticClass: "wp-block-cover__inner-container" }, [
-                _c(
-                  "p",
-                  {
-                    staticClass: "has-medium-font-size",
-                    staticStyle: { "text-align": "center" }
-                  },
-                  [_vm._v("MTN EVERYWHERE YOU GO")]
-                )
-              ])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "wp-block-columns" }, [
-          _c(
-            "div",
-            {
-              staticClass:
-                "wp-block-cover has-background-dim h-auto gd-primary rounded",
-              staticStyle: {
-                "background-image": "url(wp-content/uploads/2019/06/holder.png)"
-              }
-            },
-            [
-              _c("div", { staticClass: "wp-block-cover__inner-container" }, [
-                _c(
-                  "p",
-                  {
-                    staticClass: "has-text-color has-medium-font-size",
-                    staticStyle: { color: "#ffffff", "text-align": "center" }
-                  },
-                  [_vm._v("INDOMIE INSTANT NOODLES")]
-                )
-              ])
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", {
-        staticClass:
-          "wp-block-loop wp-block-loop-post post-thumbnail-16x9 align"
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -671,12 +648,10 @@ var render = function() {
                   "div",
                   { staticClass: "wp-block-loop wp-block-loop-station " },
                   [
-                    _c("h3", [_vm._v("Episode Details")]),
-                    _vm._v(" "),
                     _c("p", [
                       _vm._v(
                         "\n                            " +
-                          _vm._s(_vm.blog.details) +
+                          _vm._s(_vm.blog.body) +
                           "\n                        "
                       )
                     ])
@@ -776,7 +751,7 @@ var render = function() {
                       _vm._m(1),
                       _vm._v(" "),
                       _vm.feedback
-                        ? _c("div", { staticClass: "alert error" }, [
+                        ? _c("div", { staticClass: "text-danger" }, [
                             _vm._v(_vm._s(_vm.feedback))
                           ])
                         : _vm._e(),
@@ -789,7 +764,6 @@ var render = function() {
                           on: {
                             submit: function($event) {
                               $event.preventDefault()
-                              return _vm.postComment($event)
                             }
                           }
                         },

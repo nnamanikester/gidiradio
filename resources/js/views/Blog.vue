@@ -30,10 +30,10 @@
             <div class="flex-row">
                 <div class="flex">
                     <div class="wp-block-loop wp-block-loop-station ">
-                        <h3>Episode Details</h3>
+                        <!-- <h3>Blog Details</h3> -->
 
                         <p>
-                            {{ blog.details }}
+                            {{ blog.body }}
                         </p>
 
                     </div>
@@ -59,8 +59,8 @@
                         <div id="respond" class="comment-respond">
 
                             <h2 class="comment-reply-title">Leave a Reply <small><a rel="nofollow" href="#">Cancel reply</a></small></h2>
-                            <div class="alert error" v-if="feedback">{{ feedback }}</div>
-                            <form action="" @submit.prevent="postComment" method="post" class="comment-form">
+                            <div class="text-danger" v-if="feedback">{{ feedback }}</div>
+                            <form action="" @submit.prevent method="post" class="comment-form">
 
                                 <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span>Required fields are marked <span class="required">*</span></p>
                                 <p class="comment-form-comment">
@@ -177,7 +177,10 @@ export default {
                 axios.post(`/api/blog/comment`, data)
                     .then(res => {
                         this.blog.comments.unshift(res.data)
-                        console.log(res.data)
+                        this.comment.name = null
+                        this.comment.email = null
+                        this.comment.body = null
+                        this.comment.website = null
                     })
                     .catch(err => {
                         const error = err

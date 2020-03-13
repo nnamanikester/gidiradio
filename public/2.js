@@ -337,6 +337,7 @@ __webpack_require__.r(__webpack_exports__);
         })["catch"](function (err) {
           var error = err;
         });
+        console.log(data);
       }
     }
   },

@@ -214,6 +214,7 @@ export default {
                     .catch(err => {
                         const error = err
                     })
+                console.log(data)
             }
         }
     },

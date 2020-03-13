@@ -227,7 +227,7 @@ class ApiPostSpaController extends Controller
         header('Access-Control-Allow-Origin: *');
         $website = $request->website ? $request->website : 'gidiradio.com';
         $data = $comment->create([
-            'programme_id' => $request->programme_id,
+            'episode_id' => $request->programme_id,
             'name' => $request->name,
             'body' => $request->body,
             'email' => $request->email,

@@ -88,29 +88,29 @@
 
                             <h2 class="comment-reply-title">Leave a Reply <small><a rel="nofollow" href="#">Cancel reply</a></small></h2>
 
-                            <form action="" method="post" class="comment-form">
-
+                            <form action="" @submit.prevent method="post" class="comment-form">
+                                <div class="text-danger" v-if="feedback">{{ feedback }}</div>
                                 <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span>Required fields are marked <span class="required">*</span></p>
                                 <p class="comment-form-comment">
                                     <label for="comment">Comment</label>
-                                    <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea>
+                                    <textarea v-model="comment.body" cols="45" rows="8" maxlength="65525" required="required"></textarea>
                                 </p>
 
                                 <label for="author">Name <span class="required">*</span></label>
-                                <input name="author" type="text" size="30" maxlength="245" required="required">
+                                <input v-model="comment.name" type="text" size="30" maxlength="245" required="required">
 
                                 <label for="email">Email <span class="required">*</span></label>
-                                <input name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required="required">
+                                <input v-model="comment.email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required="required">
 
                                 <label for="url">Website</label>
-                                <input name="url" type="url" value="" size="30" maxlength="200">
+                                <input v-model="comment.website" type="url" value="" size="30" maxlength="200">
 
-                                <p class="comment-form-cookies-consent">
+                                <!-- <p class="comment-form-cookies-consent">
                                     <input name="cookies-consent" type="checkbox" value="yes">
                                     <label for="cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label>
-                                </p>
+                                </p> -->
                                 <p class="form-submit">
-                                    <input name="submit" type="submit" class="submit" value="Post Comment">
+                                    <button class="submit" @click="postComment()">Post Comment </button>
                                 </p>
                             </form>
                         </div><!-- #respond -->
@@ -147,6 +147,7 @@ import Advert from '../components/Advert'
 import axios from 'axios'
 import moment from 'moment'
 import Error404 from './404'
+import FormData from 'form-data'
 
 export default {
     name: 'Programme',
@@ -162,7 +163,14 @@ export default {
             oapSrc: '/images/oaps/',
             episodeSrc: '/images/programmes/episodes/',
             pageLoading: true,
-            networkError: false
+            networkError: false,
+            feedback: null,
+            comment: {
+                name: null,
+                email: null,
+                website: null,
+                body: null
+            }
         }
     },
     methods: {
@@ -183,6 +191,30 @@ export default {
                     this.pageLoading = false
                     this.networkError = true
                 })
+        },
+        postComment () {
+            if (!this.comment.body) return this.feedback = 'Comment is required!'
+            if (!this.comment.name) return this.feedback = 'Name is required!'
+            if (!this.comment.email) return this.feedback = 'Email is required!'
+            if (this.comment.body && this.comment.name && this.comment.email) {
+                const data = new FormData()
+                data.append('name', this.comment.name)
+                data.append('email', this.comment.email)
+                data.append('body', this.comment.body)
+                data.append('website', this.comment.website)
+                data.append('programme_id', this.programme.id)
+                axios.post('/api/programme/comment', data)
+                    .then(res => {
+                        this.programme.comments.unshift(res.data)
+                        this.comment.name = null
+                        this.comment.email = null
+                        this.comment.body = null
+                        this.comment.website = null
+                    })
+                    .catch(err => {
+                        const error = err
+                    })
+            }
         }
     },
     metaInfo () {

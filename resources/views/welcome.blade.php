@@ -141,7 +141,7 @@
             <!-- As It Drops -->
             @foreach ($asitdrops as $item)
             <div class=" col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2">
-                <article data-id="post-223" data-play-id="223" class="block-loop-item post-223 station type-station status-publish has-post-thumbnail hentry genre-radio entry">
+                <article data-id="post-223" data-play-id="223" class="block-loop-item post-223 station type-station status-publish has-post-thumbnail hentry genre-radio entry" onClick="playMusic({{ $item->audio }})">
                     <figure class="post-thumbnail">
                         <a class="post-thumbnail-inner" href="station/the-blues-cove/index.html" aria-hidden="true" tabindex="-1">
                         <img width="1568" height="1045" src="{{ asset('images/audio/'.$item->image) }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" sizes="(max-width: 1568px) 100vw, 1568px" />
@@ -242,7 +242,7 @@
 <div class="wp-block-columns has-2-columns">
 <div class="wp-block-column">
 
-    <h3>Now Playing</h3>
+    <h3>Most Played</h3>
 
     <div class="wp-block-loop wp-block-loop-station block-loop-row block-loop-sm block-loop-index align" >
         <div class="row" >
@@ -350,5 +350,9 @@
 @section('scripts')
     {{-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-    <script src='{{ asset('js/custom.js') }}'></script>
+    <script>
+        const playMusic = music => {
+            console.log(music);
+        }
+    </script>
 @endsection

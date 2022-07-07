@@ -26,7 +26,7 @@
     "dependencies": {
         "form-data": "^3.0.0",
         "jplayer": "^2.9.2",
-        "moment": "^2.24.0",
+        "moment": "^2.29.4",
         "node-schedule": "^1.3.2",
         "plyr": "^3.5.7-beta.0",
         "vue": "^2.6.11",
